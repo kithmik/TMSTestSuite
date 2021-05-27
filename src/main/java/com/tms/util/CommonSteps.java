@@ -1,0 +1,26 @@
+package com.tms.util;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class CommonSteps {
+
+    private WebDriver driver;
+
+    //public CommonOp(WebDriver driver) {
+      //  this.driver = driver;
+   // }
+
+    public WebElement waitUntilElementPresence(By locator, long timeOut) {
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+    public WebElement waitUntilElementClickable(By locator, long timeOut) {
+        WebDriverWait wait = new WebDriverWait(driver, timeOut);
+        return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+}
