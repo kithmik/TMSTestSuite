@@ -1,4 +1,4 @@
-package com.tms.util;
+package com.tms.util.common;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,9 +10,9 @@ public class CommonSteps {
 
     private WebDriver driver;
 
-    //public CommonOp(WebDriver driver) {
-      //  this.driver = driver;
-   // }
+    public CommonSteps(WebDriver driver) {
+        this.driver = driver;
+    }
 
     public WebElement waitUntilElementPresence(By locator, long timeOut) {
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
@@ -22,5 +22,11 @@ public class CommonSteps {
     public WebElement waitUntilElementClickable(By locator, long timeOut) {
         WebDriverWait wait = new WebDriverWait(driver, timeOut);
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public WebElement waitUntilNextElementAppears(By locator, long timeOut) {
+        WebElement element = new WebDriverWait(driver, timeOut)
+                .until(ExpectedConditions.presenceOfElementLocated(locator));
+        return element;
     }
 }

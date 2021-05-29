@@ -3,6 +3,8 @@ package com.tms.base;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -40,6 +42,11 @@ public class BaseTest {
         driver.manage().window().maximize();
 
         driver.get(properties.getProperty("baseUrl"));
+    }
+
+    @AfterSuite
+    public void closeBrowser(){
+        driver.close();
     }
 
 }
