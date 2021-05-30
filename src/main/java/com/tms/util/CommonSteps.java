@@ -1,8 +1,6 @@
-package com.tms.util.common;
+package com.tms.util;
 
-import com.tms.util.excelutils.ExcelUtil;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -30,25 +28,5 @@ public class CommonSteps {
         WebElement element = new WebDriverWait(driver, timeOut)
                 .until(ExpectedConditions.presenceOfElementLocated(locator));
         return element;
-    }
-
-    public void scrollPage(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,500)");
-
-    }
-
-    public void scrollAtTheBottomOfThePage(){
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-    }
-
-    public void clickOkButtonOfConfirmPromt(){
-        driver.switchTo( ).alert( ).accept();
-    }
-
-    public void saveTestResults(int row, int column) {
-        ExcelUtil.rowNumber = row ;
-        ExcelUtil.columnNumber = column;
     }
 }

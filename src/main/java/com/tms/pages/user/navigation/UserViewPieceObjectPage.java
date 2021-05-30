@@ -8,6 +8,7 @@ public class UserViewPieceObjectPage {
 
     private WebDriver driver;
     private CommonSteps commonStepsObj;
+    private CommonSteps commonSteps;
 
     //Constructor
     public UserViewPieceObjectPage (WebDriver driver, CommonSteps commonStepsObj){
@@ -16,9 +17,17 @@ public class UserViewPieceObjectPage {
         this.commonStepsObj = commonStepsObj;
     }
 
+    public UserViewPieceObjectPage (WebDriver driver){
+        this.driver = driver;
+        commonSteps = new CommonSteps(driver);
+
+    }
+
     //Web Elements
     private By myProfileBtn = By.xpath("//a[@href='profile.php']");
     private By enquiryTab = By.xpath("//a[contains(text(),' Enquiry ')]");
+
+    private By tourPackageElement = By.xpath("//a[@href='package-list.php']");
 
     /**
      * @Author Nishani
@@ -31,6 +40,11 @@ public class UserViewPieceObjectPage {
     public void clickOnEnquiryTab(){
         driver.findElement(enquiryTab).click();
 
+    }
+
+    public void clickOnTourPackageMenu() {
+        commonSteps.waitUntilNextElementAppears(tourPackageElement,4000);
+        driver.findElement(tourPackageElement).click();
     }
 
 }
