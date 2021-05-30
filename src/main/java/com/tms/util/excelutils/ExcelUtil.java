@@ -13,7 +13,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.Platform;
 
 public class ExcelUtil {
-    public static final String       testDataExcelFileName = "enquirydata.xlsx"; //Global test data excel file
+    public static final String       testDataExcelFileName = "testdata.xlsx"; //Global test data excel file
     public static final String       currentDir            = System.getProperty("user.dir");  //Main Directory of the project
     public static       String       testDataExcelPath     = null; //Location of Test data excel file
     private static      XSSFWorkbook excelWBook; //Excel WorkBook
@@ -31,7 +31,7 @@ public class ExcelUtil {
 
         // Open the Excel file
         try{
-            FileInputStream ExcelFile = new FileInputStream("src/main/resources/testdata/enquirydata.xlsx");
+            FileInputStream ExcelFile = new FileInputStream("src/main/resources/testdata/testdata.xlsx");
             excelWBook = new XSSFWorkbook(ExcelFile);
             excelWSheet = excelWBook.getSheet(sheetName);
         } catch (FileNotFoundException e) {
@@ -69,7 +69,7 @@ public class ExcelUtil {
         }
         // Constant variables Test Data path and Test Data file name
         try{
-            FileOutputStream fileOut = new FileOutputStream("src/main/resources/testdata/enquirydata.xlsx");
+            FileOutputStream fileOut = new FileOutputStream("src/main/resources/testdata/testdata.xlsx");
             excelWBook.write(fileOut);
             fileOut.flush();
             fileOut.close();

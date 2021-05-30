@@ -1,8 +1,9 @@
 package com.tms.user.booking;
 
 import com.tms.base.BaseTest;
-import com.tms.pages.user.booking.ManageBookingPage;
-import com.tms.util.common.CommonSteps;
+import com.tms.pages.ManageBookingPage;
+import com.tms.pages.TourBookingPage;
+import com.tms.util.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
 import com.tms.util.listners.TestListners;
 import org.openqa.selenium.By;
@@ -35,7 +36,6 @@ public class ManageBookingTest extends BaseTest {
         ExcelUtil.setExcelFileSheet("TourBooking");
 
     }
-
     @Test
     private void sss(){
         manageBookingPageObj.clickOnMyTourHistoryMenu();

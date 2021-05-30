@@ -1,6 +1,6 @@
-package com.tms.pages.user.booking;
+package com.tms.pages;
 
-import com.tms.util.common.CommonSteps;
+import com.tms.util.CommonSteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 

@@ -1,6 +1,6 @@
-package com.tms.pages.user.booking;
+package com.tms.pages;
 
-import com.tms.util.common.CommonSteps;
+import com.tms.util.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.openqa.selenium.By;
@@ -20,7 +20,7 @@ public class TourBookingPage {
 
     }
 
-    private By detailsButtonElement = By.xpath("//a[@href='package-details.php?pkgid=1']");
+    private By detailsButtonElement = By.xpath("//a[@href=\"package-details.php?pkgid=1\"]");
     private By fromDateElement = By.id("datepicker");
     private By toDateElement = By.id("datepicker1");
     private By commentElement = By.name("comment");
@@ -38,7 +38,8 @@ public class TourBookingPage {
     }
 
     public void bookingTheTourPackageWithExcelData(XSSFRow row) {
-        commonStepsObj.scrollPage();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,500)");
         commonStepsObj.waitUntilNextElementAppears(fromDateElement,4000);
         driver.findElement(fromDateElement).click();
         driver.findElement(fromDateElement).sendKeys(row.getCell(1).toString());
@@ -51,17 +52,20 @@ public class TourBookingPage {
         String BookingMessage = driver.findElement(bookingSuccessElement).getText();
         Assert.assertEquals(BookingMessage,expectedResult);
     }
+    public void verifyUnsuccessfulBookingMessageWithExcel(String expectedResult) {
+        Assert.assertEquals("",expectedResult);
+    }
 
     public void verifyValidationMessageWithExcel(String expectedResult) {
         String ValidationMessage = driver.findElement(fromDateElement).getAttribute("validationMessage");
         Assert.assertEquals(ValidationMessage,expectedResult);
+
     }
-    public void verifyErrorValidationMessageWithExcel(String expectedResult) {
-        String ValidationMessage = driver.findElement(fromDateElement).getAttribute("validationMessage");
-        Assert.assertEquals(ValidationMessage,expectedResult);
+    public void saveTestResults(int row, int column) {
+        ExcelUtil.rowNumber = row ;
+        ExcelUtil.columnNumber = column;
     }
 
-
-
+//driver.findElement(fullName).getAttribute("validationMessage")
 
 }

@@ -1,4 +1,4 @@
-package com.tms.pages;
+package com.tms.pages.admin.navigation;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
