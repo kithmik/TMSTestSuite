@@ -1,26 +1,24 @@
 package com.tms.pages.user.navigation;
+
 import com.tms.util.common.CommonSteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 public class UserViewPieceObjectPage {
 
     private WebDriver driver;
-    private CommonSteps commonSteps;
+    private CommonSteps commonStepsObj;
 
-    private By myProfileBtn = By.xpath("//a[@href='profile.php']");
-    private By tourPackageElement = By.xpath("//a[@href='package-list.php']");
-    private By tourHistoryElement = By.xpath("//a[@href='tour-history.php']");
+    //Constructor
+    public UserViewPieceObjectPage (WebDriver driver, CommonSteps commonStepsObj){
 
-
-
-
-    public UserViewPieceObjectPage (WebDriver driver){
         this.driver = driver;
-        commonSteps = new CommonSteps(driver);
-
+        this.commonStepsObj = commonStepsObj;
     }
+
+    //Web Elements
+    private By myProfileBtn = By.xpath("//a[@href='profile.php']");
+    private By enquiryTab = By.xpath("//a[contains(text(),' Enquiry ')]");
 
     /**
      * @Author Nishani
@@ -30,16 +28,9 @@ public class UserViewPieceObjectPage {
         driver.findElement(myProfileBtn).click();
     }
 
+    public void clickOnEnquiryTab(){
+        driver.findElement(enquiryTab).click();
 
-
-
-
-
-
-    public void clickOnTourPackageMenu() {
-        commonSteps.waitUntilNextElementAppears(tourPackageElement,4000);
-        driver.findElement(tourPackageElement).click();
     }
-
 
 }
