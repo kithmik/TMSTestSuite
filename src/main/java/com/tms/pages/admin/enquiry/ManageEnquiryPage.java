@@ -1,4 +1,4 @@
 package com.tms.pages.admin.enquiry;
 
-public class enquiry {
+public class ManageEnquiryPage {
 }
