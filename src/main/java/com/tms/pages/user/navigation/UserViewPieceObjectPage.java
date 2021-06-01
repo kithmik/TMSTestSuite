@@ -3,6 +3,13 @@ package com.tms.pages.user.navigation;
 import com.tms.util.common.CommonSteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import java.util.logging.Logger;
+
+/**
+ * @Author Nishani Mendis
+ * User View Navigation's Web Elements and Its' Methods.
+ *
+ */
 
 public class UserViewPieceObjectPage {
 
@@ -10,9 +17,7 @@ public class UserViewPieceObjectPage {
     private CommonSteps commonStepsObj;
     private CommonSteps commonSteps;
 
-    //Constructor
     public UserViewPieceObjectPage (WebDriver driver, CommonSteps commonStepsObj){
-
         this.driver = driver;
         this.commonStepsObj = commonStepsObj;
     }
@@ -23,17 +28,13 @@ public class UserViewPieceObjectPage {
 
     }
 
-    //Web Elements
     private By myProfileBtn = By.xpath("//a[@href='profile.php']");
     private By enquiryTab = By.xpath("//a[contains(text(),' Enquiry ')]");
-
     private By tourPackageElement = By.xpath("//a[@href='package-list.php']");
+    private static final Logger LOGGER = Logger.getLogger(UserViewPieceObjectPage.class.getName());
 
-    /**
-     * @Author Nishani
-     */
     public void clickOnMyProfile() {
-        System.out.println("clickOnMyProfile | UserViewPieceObjectPage");
+        LOGGER.info("clickOnMyProfile | UserViewPieceObjectPage");
         driver.findElement(myProfileBtn).click();
     }
 
@@ -43,6 +44,7 @@ public class UserViewPieceObjectPage {
     }
 
     public void clickOnTourPackageMenu() {
+        LOGGER.info("clickOnTourPackageMenu | UserViewPieceObjectPage");
         commonSteps.waitUntilNextElementAppears(tourPackageElement,4000);
         driver.findElement(tourPackageElement).click();
     }

@@ -1,7 +1,16 @@
 package com.tms.pages.admin.navigation;
+import com.tms.util.common.CommonSteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Logger;
+
+/**
+ * @Author Nishani Mendis
+ * Admin View Navigation's Web Elements and Its' Methods.
+ *
+ */
 
 public class AdminViewPieceObjectPage {
 
@@ -15,72 +24,58 @@ public class AdminViewPieceObjectPage {
     private By manageIssues = By.xpath("//span[contains(text(),'Manage Issues')]");
     private By manageEnguiries = By.xpath("//span[contains(text(),'Manage Enquiries')]");
     private By managePages = By.xpath("//span[contains(text(),'Manage Pages')]");
-
+    private static final Logger LOGGER = Logger.getLogger(AdminViewPieceObjectPage.class.getName());
+    private CommonSteps commonStepsObj;
 
     public AdminViewPieceObjectPage(WebDriver driver){
         this.driver = driver;
     }
 
-    /**
-     * @Author Nishani
-     */
     public void clickOnDashboard(){
-        System.out.println("clickOnDashboard  | AdminViewPieceObjectPage");
+        LOGGER.info("clickOnDashboard  | AdminViewPieceObjectPage");
         driver.findElement(dashboard).click();
     }
 
-    /**
-     * @Author Nishani
-     */
     public void clickOnTourPackages() {
-        System.out.println("clickOnTourPackages  | AdminViewPieceObjectPage");
+        LOGGER.info("clickOnTourPackages  | AdminViewPieceObjectPage");
+        commonStepsObj = new CommonSteps(driver);
+        commonStepsObj.waitUntilElementPresence(tourPackages,3000);
         driver.findElement(tourPackages).click();
     }
-    /**
-     * @Author Nishani
-     */
+
     public void clickOnCreatePackages(){
-        System.out.println("clickOnTourPackages  | AdminViewPieceObjectPage");
+        LOGGER.info("clickOnTourPackages  | AdminViewPieceObjectPage");
         driver.findElement(createPackages).click();
     }
-    /**
-     * @Author Nishani
-     */
+
     public void clickOnManagePackages(){
-        System.out.println("clickOnTourPackages  | AdminViewPieceObjectPage");
+        LOGGER.info("clickOnManagePackages  | AdminViewPieceObjectPage");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(managePackages).click();
     }
-    /**
-     * @Author Nishani
-     */
+
     public void clickOnManageUsers(){
-        System.out.println("clickOnTourPackages  | AdminViewPieceObjectPage");
+        LOGGER.info("clickOnTourPackages  | AdminViewPieceObjectPage");
         driver.findElement(manageUsers).click();
     }
-    /**
-     * @Author Nishani
-     */
+
     public void clickOnManageBooking(){
-        System.out.println("clickOnTourPackages  | AdminViewPieceObjectPage");
+        LOGGER.info("clickOnTourPackages  | AdminViewPieceObjectPage");
         driver.findElement(manageBooking).click();
-    }   /**
-     * @Author Nishani
-     */
+    }
+
     public void clickOnManageIssues(){
-        System.out.println("clickOnTourPackages  | AdminViewPieceObjectPage");
+        LOGGER.info("clickOnTourPackages  | AdminViewPieceObjectPage");
         driver.findElement(manageIssues).click();
-    }   /**
-     * @Author Nishani
-     */
+    }
+
     public void clickOnManageEnguiries(){
-        System.out.println("clickOnTourPackages  | AdminViewPieceObjectPage");
+        LOGGER.info("clickOnTourPackages  | AdminViewPieceObjectPage");
         driver.findElement(manageEnguiries).click();
     }
-    /**
-     * @Author Nishani
-     */
+
     public void clickOnManagePages(){
-        System.out.println("clickOnTourPackages  | AdminViewPieceObjectPage");
+        LOGGER.info("clickOnTourPackages  | AdminViewPieceObjectPage");
         driver.findElement(managePages).click();
     }
 
