@@ -1,6 +1,6 @@
 package com.tms.pages;
 
-import com.tms.util.CommonSteps;
+import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.openqa.selenium.By;

@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.AfterClass;
+import org.testng.annotations.AfterClass;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,6 +18,7 @@ public class BaseTest {
     public static Properties properties;
     private static final Logger LOGGER = Logger.getLogger(BaseTest.class.getName());
 
+    protected static boolean isBrowserOpen = false;
     public BaseTest(){
         try {
             properties = new Properties();
@@ -50,7 +52,7 @@ public class BaseTest {
 
         driver.get(properties.getProperty("baseUrl"));
 
-
+        isBrowserOpen = !driver.toString().contains("null");
     }
 
 
@@ -58,7 +60,7 @@ public class BaseTest {
     public void closeBrowser(){
         LOGGER.info("Tests are ending!");
         driver.close();
-
+        isBrowserOpen = !driver.toString().contains("null");
     }
 
 }

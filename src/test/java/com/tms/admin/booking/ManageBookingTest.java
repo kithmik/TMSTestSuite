@@ -7,12 +7,10 @@ import com.tms.pages.user.booking.TourBookingPage;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
-import com.tms.util.listners.TestListners;
 import org.openqa.selenium.By;
 import org.testng.annotations.*;
 
 
-@Listeners({ TestListners.class })
 public class ManageBookingTest extends BaseTest {
 
     private CommonSteps commonStepsObj;
@@ -24,7 +22,10 @@ public class ManageBookingTest extends BaseTest {
 
     @BeforeMethod
     public void setup() throws InterruptedException {
-        initialization();
+
+        if(!isBrowserOpen) {
+            initialization();
+        }
 
         commonStepsObj = new CommonSteps(driver);
         manageBookingPageObj = new ManageBookingPage(driver, commonStepsObj);
@@ -63,12 +64,14 @@ public class ManageBookingTest extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void verifyThatAdminCanConfirmTheSuccessfullyAddedBooking() {
+    public void verifyThatAdminCanConfirmTheSuccessfullyAddedBooking() throws InterruptedException {
         adminViewPieceObjectPageObj.clickOnManageBooking();
         manageBookingPageObj.confirmTheTourPackageByAdmin();
         commonStepsObj.clickOkButtonOfConfirmPromt();
         manageBookingPageObj.verifyAdminActionBookingMessageWithExcel(ExcelUtil.getCellData(8,4));
-        commonStepsObj.saveTestResults(8,5);
+        manageBookingPageObj.verifyAdminTourDetailOfSubmittedEnquiryInTheDB(ExcelUtil.getCellData(8,6));
+        manageBookingPageObj.verifyApplicationActionBookingMessageWithExcel(ExcelUtil.getCellData(8,7));
+
     }
 
 
@@ -79,7 +82,8 @@ public class ManageBookingTest extends BaseTest {
         manageBookingPageObj.cancelTheTourPackageByAdmin();
         commonStepsObj.clickOkButtonOfConfirmPromt();
         manageBookingPageObj.verifyAdminActionBookingMessageWithExcel(ExcelUtil.getCellData(9,4));
-        commonStepsObj.saveTestResults(9,5);
+        manageBookingPageObj.verifyApplicationActionBookingMessageWithExcel(ExcelUtil.getCellData(9,7));
+        manageBookingPageObj.verifyAdminTourDetailOfSubmittedEnquiryInTheDB(ExcelUtil.getCellData(9,6));
 
     }
 
@@ -88,12 +92,9 @@ public class ManageBookingTest extends BaseTest {
     public void logoutAdmin(){
         driver.findElement(By.className("dropdown-toggle")).click();
         driver.findElement(By.xpath("//*[@href='logout.php']")).click();
-    }
+        driver.get(properties.getProperty("baseUrl"));
 
-//    @AfterTest
-//    public void closeBrowser1(){
-//        driver.close();
-//    }
+    }
 
 
 }

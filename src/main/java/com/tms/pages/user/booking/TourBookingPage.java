@@ -1,6 +1,8 @@
 package com.tms.pages.user.booking;
 
+import com.tms.pages.user.enquiry.EnquiryPage;
 import com.tms.util.common.CommonSteps;
+import com.tms.util.dbutils.DbUtil;
 import com.tms.util.excelutils.ExcelUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.openqa.selenium.By;
@@ -8,10 +10,18 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import java.util.Map;
+import java.util.logging.Logger;
+
+import static org.testng.Assert.assertEquals;
+
 
 public class TourBookingPage {
     private WebDriver driver;
     private CommonSteps commonStepsObj;
+    private static final DbUtil dbUtil = new DbUtil();
+    private static final Logger LOGGER = Logger.getLogger(TourBookingPage.class.getName());
+
 
 
     public TourBookingPage(WebDriver driver, CommonSteps commonStepsObj) {
@@ -59,6 +69,20 @@ public class TourBookingPage {
     public void verifyErrorValidationMessageWithExcel(String expectedResult) {
         String ValidationMessage = driver.findElement(fromDateElement).getAttribute("validationMessage");
         Assert.assertEquals(ValidationMessage,expectedResult);
+    }
+
+    public void verifyTourDetailOfSubmittedEnquiryInTheDB(String expectedFromDate,String expectedToDate,String expectedComment){
+        Map<String, String> result = dbUtil.getDataFromTourPackagesTable();
+        if (result != null) {
+            LOGGER.info("From Date : " + result.get("FromDate"));
+            assertEquals(expectedFromDate, result.get("FromDate"));
+            LOGGER.info("To Date : " + result.get("ToDate"));
+            assertEquals(expectedToDate, result.get("ToDate"));
+            LOGGER.info("Comment : " + result.get("Comment"));
+            assertEquals(expectedComment, result.get("Comment"));
+        } else {
+            LOGGER.info("No db record found for Full Name");
+        }
     }
 
 

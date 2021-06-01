@@ -6,11 +6,9 @@ import com.tms.pages.user.booking.TourBookingPage;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
-import com.tms.util.listners.TestListners;
 import org.openqa.selenium.By;
 import org.testng.annotations.*;
 
-@Listeners({ TestListners.class })
 public class TourBookingTest extends BaseTest {
 
     private CommonSteps commonStepsObj;
@@ -42,7 +40,7 @@ public class TourBookingTest extends BaseTest {
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(1));
         tourBookingPageObj.verifyBookingMessageWithExcel(ExcelUtil.getCellData(1,4));
-        commonStepsObj.saveTestResults(1,5);
+        tourBookingPageObj.verifyTourDetailOfSubmittedEnquiryInTheDB(ExcelUtil.getCellData(1,1),ExcelUtil.getCellData(1,2),ExcelUtil.getCellData(1,3));
 
     }
     @Test(priority = 2)
@@ -51,7 +49,7 @@ public class TourBookingTest extends BaseTest {
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(2));
         tourBookingPageObj.verifyBookingMessageWithExcel(ExcelUtil.getCellData(2,4));
-        commonStepsObj.saveTestResults(2,5);
+        tourBookingPageObj.verifyTourDetailOfSubmittedEnquiryInTheDB(ExcelUtil.getCellData(2,1),ExcelUtil.getCellData(2,2),ExcelUtil.getCellData(2,3));
 
     }
 
@@ -61,7 +59,6 @@ public class TourBookingTest extends BaseTest {
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(4));
         tourBookingPageObj.verifyErrorValidationMessageWithExcel(ExcelUtil.getCellData(4,4));
-        commonStepsObj.saveTestResults(4,5);
 
     }
     @Test(priority = 4)
@@ -70,7 +67,6 @@ public class TourBookingTest extends BaseTest {
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(5));
         tourBookingPageObj.verifyErrorValidationMessageWithExcel(ExcelUtil.getCellData(5,4));
-        commonStepsObj.saveTestResults(5,5);
 
     }
     @Test(priority = 5)
@@ -79,7 +75,6 @@ public class TourBookingTest extends BaseTest {
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(6));
         tourBookingPageObj.verifyErrorValidationMessageWithExcel(ExcelUtil.getCellData(6,4));
-        commonStepsObj.saveTestResults(6,5);
 
     }
     @Test(priority = 6)
@@ -88,7 +83,6 @@ public class TourBookingTest extends BaseTest {
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(3));
         tourBookingPageObj.verifyValidationMessageWithExcel(ExcelUtil.getCellData(3,4));
-        commonStepsObj.saveTestResults(3,5);
 
     }
 

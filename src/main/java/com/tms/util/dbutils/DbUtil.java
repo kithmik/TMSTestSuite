@@ -1,5 +1,9 @@
 package com.tms.util.dbutils;
 
+import com.opencsv.exceptions.CsvValidationException;
+import com.tms.util.csvutils.CsvUtils;
+
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,7 +34,8 @@ public class DbUtil {
         }
 
         try {
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/tms", "root", "");
+            String[] credentials = CsvUtils.ReadCSV();
+            conn = DriverManager.getConnection(credentials[0], credentials[1], credentials[2]);
             if (conn != null) {
                 LOGGER.info("Connected to the database!");
             } else {
@@ -39,6 +44,10 @@ public class DbUtil {
 
         } catch (SQLException e) {
             LOGGER.info("MySQL Connection Failed!");
+            e.printStackTrace();
+        } catch (CsvValidationException e){
+            e.printStackTrace();
+        } catch (IOException e){
             e.printStackTrace();
         }
 
@@ -69,5 +78,31 @@ public class DbUtil {
 
     }
 
-}
+    public  static Map<String, String> getDataFromTourPackagesTable() {
+        makeJDBCConnection();
+        Map<String, String> dbResults = new HashMap<>();
 
+        try {
+            String getQueryStatement = "SELECT * FROM tblbooking ORDER BY BookingId DESC LIMIT 1";
+            prepareStat = conn.prepareStatement(getQueryStatement);
+
+            ResultSet rs = prepareStat.executeQuery();
+            while (rs.next()) {
+                dbResults.put("FromDate", rs.getString("FromDate"));
+                dbResults.put("ToDate", rs.getString("ToDate"));
+                dbResults.put("Comment", rs.getString("Comment"));
+                dbResults.put("status", rs.getString("status"));
+            }
+
+            prepareStat.close();
+            conn.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dbResults;
+
+    }
+
+}

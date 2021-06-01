@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.util.ArrayList;
+
 public class CommonSteps {
 
     private WebDriver driver;
@@ -45,6 +47,11 @@ public class CommonSteps {
 
     public void clickOkButtonOfConfirmPromt(){
         driver.switchTo( ).alert( ).accept();
+    }
+
+    public void tab() {
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1)); //switches to new tab
     }
 
     public void saveTestResults(int row, int column) {
