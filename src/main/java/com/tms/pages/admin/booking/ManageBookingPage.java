@@ -56,7 +56,7 @@ public class ManageBookingPage {
     }
 
     public void verifyAdminTourDetailOfSubmittedEnquiryInTheDB(String expectedAction) {
-        Map<String, String> result = dbUtil.getDataFromBookingTable();
+        Map<String, String> result = dbUtil.getDataFromTourPackagesTable();
         if (result != null) {
             LOGGER.info("Action : " + result.get("status"));
             assertEquals(expectedAction, result.get("status"));
