@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TMS Test Suite" >
+    <listeners>
+        <listener class-name="com.tms.util.listeners.TestListener"/>
+    </listeners>
+
+    <test name="TMS UI Tests">
+        <classes>
+            <class name="com.tms.user.enquiry.EnquiryTest"/>
+            <class name="com.tms.user.booking.ManageBookingTest"/>
+        </classes>
+    </test>
+</suite>

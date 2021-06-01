@@ -1,19 +1,21 @@
 package com.tms.base;
 
+import com.tms.util.listeners.TestListener;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterClass;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.Logger;
 
 public class BaseTest {
     public static WebDriver driver;
     public static Properties properties;
+    private static final Logger LOGGER = Logger.getLogger(BaseTest.class.getName());
 
     public BaseTest(){
         try {
@@ -26,7 +28,13 @@ public class BaseTest {
             e.printStackTrace();
         }
     }
+
+    public WebDriver getDriver() {
+        return driver;
+    }
+
     public static void initialization() {
+        LOGGER.info("Tests is starting!");
         String browserName = properties.getProperty("browser");
 
         if(browserName.equals("chrome")){
@@ -38,15 +46,19 @@ public class BaseTest {
             driver = new FirefoxDriver();
         }
 
-
         driver.manage().window().maximize();
 
         driver.get(properties.getProperty("baseUrl"));
+
+
     }
 
-    @AfterSuite
+
+    @AfterClass
     public void closeBrowser(){
+        LOGGER.info("Tests are ending!");
         driver.close();
+
     }
 
 }

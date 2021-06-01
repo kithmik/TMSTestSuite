@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  * @author Malsha Nishadini
- * Make JDBC connection and retrieve data from the database
+ * Made JDBC connection and retrieved data from the database
  *
  */
 
@@ -68,7 +68,6 @@ public class DbUtil {
         return dbResults;
 
     }
-
 
 }
 

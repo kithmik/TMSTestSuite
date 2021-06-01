@@ -1,16 +1,15 @@
 package com.tms.pages.user.enquiry;
 
 import com.tms.util.dbutils.DbUtil;
-import com.tms.util.excelutils.ExcelUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import java.util.Map;
 import java.util.logging.Logger;
 
+
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
+
 
 public class EnquiryPage {
     private static final DbUtil dbUtil = new DbUtil();
@@ -36,6 +35,7 @@ public class EnquiryPage {
 
 
     public void submitEnquiry(XSSFRow row) {
+        LOGGER.info("Verifying submit  enquiry");
         driver.findElement(fullName).sendKeys(row.getCell(1).toString());
         driver.findElement(email).sendKeys(row.getCell(2).toString());
         driver.findElement(mobileNo).sendKeys(row.getCell(3).toString());
@@ -67,19 +67,10 @@ public class EnquiryPage {
     public void verifyFullNameOfSubmittedEnquiryInTheDB(String expectedFullName){
         Map<String, String> result = dbUtil.getDataFromEnquiryTable();
         if (result != null) {
-            LOGGER.info("Full Name : " + result.get("FullName"));
             assertEquals(expectedFullName, result.get("FullName"));
         } else {
             LOGGER.info("No db record found for Full Name");
         }
-    }
-
-
-
-    public void saveTestResults(int row, int column) {
-        ExcelUtil.rowNumber = row ;
-        ExcelUtil.columnNumber = column;
-
     }
 
 
