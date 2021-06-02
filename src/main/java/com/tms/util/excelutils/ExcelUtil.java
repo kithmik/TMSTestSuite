@@ -16,15 +16,12 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  *
  */
 
-
 public class ExcelUtil {
     public static String testDataExcelPath = "src/main/resources/testdata/testdata.xlsx";
     private static XSSFWorkbook excelWBook;
     private static XSSFSheet excelWSheet;
     private static XSSFCell cell;
     private static XSSFRow row;
-    public static int rowNumber;
-    public static int columnNumber;
 
     public static void setExcelFileSheet(String sheetName) {
         try{

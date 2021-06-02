@@ -2,7 +2,6 @@ package com.tms.pages.admin.navigation;
 import com.tms.util.common.CommonSteps;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Logger;
 

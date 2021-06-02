@@ -1,7 +1,6 @@
 package com.tms.pages.user.enquiry;
 
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
-import com.tms.util.common.CommonSteps;
 import com.tms.util.dbutils.DbUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.openqa.selenium.By;
@@ -22,9 +21,9 @@ public class EnquiryPage {
     private WebDriver driver;
     private UserViewPieceObjectPage userViewPieceObjectPage;
 
-
-    public EnquiryPage(WebDriver driver) {
+    public EnquiryPage(WebDriver driver, UserViewPieceObjectPage userViewPieceObjectPage) {
         this.driver = driver;
+        this.userViewPieceObjectPage = userViewPieceObjectPage;
 
     }
 
@@ -64,11 +63,6 @@ public class EnquiryPage {
         assertEquals(validationMessage, expectedValidationMessage);
     }
 
-    public void verifyValidationMessageForValidSubject(String expectedValidationMessage){
-        String validationMessage = driver.findElement(subject).getAttribute("validationMessage");
-        assertEquals(validationMessage, expectedValidationMessage);
-    }
-
     public void verifyValidationMessageWhenHavingEmptyTextFields(String emptyTextFieldId, String expectedValidationMessage){
         String validationMessage = driver.findElement(By.id(emptyTextFieldId)).getAttribute("validationMessage");
         assertEquals(validationMessage, expectedValidationMessage);
@@ -78,7 +72,7 @@ public class EnquiryPage {
     public void verifyFullNameOfSubmittedEnquiryInTheDB(String expectedFullName){
         Map<String, String> result = dbUtil.getDataFromEnquiryTable();
         if (result != null) {
-            assertEquals(expectedFullName, result.get("FullName"));
+            assertEquals(result.get("FullName"), expectedFullName);
         } else {
             LOGGER.info("No db record found for Full Name");
         }

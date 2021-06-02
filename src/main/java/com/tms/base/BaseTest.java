@@ -52,7 +52,6 @@ public class BaseTest {
         isBrowserOpen = !driver.toString().contains("null");
     }
 
-
     @AfterClass
     public void closeBrowser(){
         LOGGER.info("Tests are ending!");

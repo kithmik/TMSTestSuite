@@ -2,7 +2,6 @@ package com.tms.util.dbutils;
 
 import com.opencsv.exceptions.CsvValidationException;
 import com.tms.util.csvutils.CsvUtils;
-
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -53,7 +52,7 @@ public class DbUtil {
 
     }
 
-    public  static Map<String, String> getDataFromEnquiryTable() {
+    public static Map<String, String> getDataFromEnquiryTable() {
         makeJDBCConnection();
         Map<String, String> dbResults = new HashMap<>();
 
@@ -78,7 +77,7 @@ public class DbUtil {
 
     }
 
-    public  static Map<String, String> getDataFromBookingTable() {
+    public static Map<String, String> getDataFromBookingTable() {
         makeJDBCConnection();
         Map<String, String> dbResults = new HashMap<>();
 
@@ -105,7 +104,7 @@ public class DbUtil {
 
     }
 
-    public  static Map<String, String> getDataFromTourPackagesTable() {
+    public static Map<String, String> getDataFromTourPackagesTable() {
         makeJDBCConnection();
         Map<String, String> dbResults = new HashMap<>();
 
@@ -127,7 +126,7 @@ public class DbUtil {
 
     }
 
-    public  static Map<String, String> getDataFromUserTable(String gmail) {
+    public static Map<String, String> getDataFromUserTable(String gmail) {
         makeJDBCConnection();
         Map<String, String> dbResults = new HashMap<>();
 

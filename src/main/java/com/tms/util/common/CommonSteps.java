@@ -1,6 +1,5 @@
 package com.tms.util.common;
 
-import com.tms.util.excelutils.ExcelUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -54,8 +53,4 @@ public class CommonSteps {
         driver.switchTo().window(tabs.get(1)); //switches to new tab
     }
 
-    public void saveTestResults(int row, int column) {
-        ExcelUtil.rowNumber = row ;
-        ExcelUtil.columnNumber = column;
-    }
 }
