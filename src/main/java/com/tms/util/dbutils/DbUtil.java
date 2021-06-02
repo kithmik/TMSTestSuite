@@ -78,7 +78,7 @@ public class DbUtil {
 
     }
 
-    public  static Map<String, String> getDataFromTourPackagesTable() {
+    public  static Map<String, String> getDataFromBookingTable() {
         makeJDBCConnection();
         Map<String, String> dbResults = new HashMap<>();
 
@@ -105,4 +105,45 @@ public class DbUtil {
 
     }
 
+    public  static Map<String, String> getDataFromTourPackagesTable() {
+        makeJDBCConnection();
+        Map<String, String> dbResults = new HashMap<>();
+
+        try {
+            String getQueryStatement = "SELECT * FROM tbltourpackages WHERE PackageId IN(SELECT MAX(PackageId) FROM tbltourpackages)";
+            prepareStat = conn.prepareStatement(getQueryStatement);
+            ResultSet rs = prepareStat.executeQuery();
+            while (rs.next()) {
+                dbResults.put("PackageName", rs.getString("PackageName"));
+                dbResults.put("PackagePrice", rs.getString("PackagePrice"));
+                dbResults.put("PackageFetures", rs.getString("PackageFetures"));
+            }
+            prepareStat.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dbResults;
+
+    }
+
+    public  static Map<String, String> getDataFromUserTable(String gmail) {
+        makeJDBCConnection();
+        Map<String, String> dbResults = new HashMap<>();
+
+        try {
+            String getQueryStatement = "SELECT * FROM tblusers WHERE EmailId ='" + gmail +"'";
+            prepareStat = conn.prepareStatement(getQueryStatement);
+            ResultSet rs = prepareStat.executeQuery();
+            while (rs.next()) {
+                dbResults.put("FullName", rs.getString("FullName"));
+                dbResults.put("MobileNumber", rs.getString("MobileNumber"));
+            }
+            prepareStat.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return dbResults;
+    }
 }
