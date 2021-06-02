@@ -2,11 +2,9 @@ package com.tms.util.listeners;
 
 import static com.tms.util.extentreports.ExtentManager.getExtentReports;
 import static com.tms.util.extentreports.ExtentTestManager.getTest;
-
 import com.aventstack.extentreports.Status;
 import java.util.Objects;
 import java.util.logging.Logger;
-
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
