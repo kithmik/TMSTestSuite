@@ -9,8 +9,18 @@ import com.tms.util.excelutils.ExcelUtil;
 import org.openqa.selenium.By;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.lang.reflect.Method;
 import java.util.logging.Logger;
 import static com.tms.util.excelutils.ExcelUtil.setExcelFileSheet;
+import static com.tms.util.extentreports.ExtentTestManager.startTest;
+
+/**
+ * @Author Nishani Mendis
+ * Test User Profile Update with Valid and Invalid Inputs.
+ *  1.verifyUserProfileUpdate
+ *  2.verifyUserProfileUpdateWithInvalidDataTypeForMobilNumber
+ */
 
 public class UserProfileTest extends BaseTest {
     private UserViewPieceObjectPage userViewPieceObjectPage;
@@ -34,25 +44,23 @@ public class UserProfileTest extends BaseTest {
     }
 
     @Test(priority =1)
-    public void verifyUserProfileUpdate() {
-        LOGGER.info("********** Start Test-: verifyUserProfileUpdate | UserProfileTest **********");
+    public void verifyUserProfileUpdate(Method method) {
+        startTest(method.getName(), "Verify that User Profile is able to update correctly and save updated data to the database ");
         userViewPieceObjectPage.clickOnMyProfile();
         userProfilePage.updateUserName(ExcelUtil.getRowData(1));
         userProfilePage.updateMobileNumber(ExcelUtil.getRowData(1));
         userProfilePage.clickOnUpdateBtn();
         userProfilePage.verifyUserProfileUpdateSuccessMsgWithExcel(ExcelUtil.getCellData(1,3));
         userProfilePage.verifyUpdatedNameAndMobileNumberInTheDB(ExcelUtil.getCellData(1,1),ExcelUtil.getCellData(1,2));
-        LOGGER.info("########### End Test-: verifyUserProfileUpdate | UserProfileTest ##########");
-        }
+    }
 
-        @Test(priority =2)
-        public void verifyUserProfileUpdateWithInvalidDataTypeForMobilNumber() {
-        LOGGER.info("********** Start Test-: verifyUserProfileUpdateWithInvalidDataTypeForMobilNumber | UserProfileTest **********");
+    @Test(priority =2)
+    public void verifyUserProfileUpdateWithInvalidDataTypeForMobileNumber(Method method) {
+        startTest(method.getName(), "Verify that User Profile is unable to update correctly with invalid data type for mobile number ");
         userViewPieceObjectPage.clickOnMyProfile();
         userProfilePage.updateMobileNumber(ExcelUtil.getRowData(2));
         userProfilePage.clickOnUpdateBtn();
         userProfilePage.verifyUserProfileUpdateInvalidDataTypeWithExcel(ExcelUtil.getCellData(2,3));
-        LOGGER.info("########### End Test-: verifyUserProfileUpdateWithInvalidDataTypeForMobilNumber | UserProfileTest ##########");
     }
 }
 

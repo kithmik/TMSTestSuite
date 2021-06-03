@@ -61,15 +61,15 @@ public class UserProfilePage {
         Assert.assertEquals(driver.findElement(mobileNumber).getAttribute("validationMessage"),expectedResult);
     }
 
-    public void verifyUpdatedNameAndMobileNumberInTheDB(String expectedFullName, String ExpectedMobileNumber){
+    public void verifyUpdatedNameAndMobileNumberInTheDB(String expectedFullName, String expectedMobileNumber){
         LOGGER.info("verifyUpdatedNameAndMobileNumberInTheDB | UserProfilePage");
         String gmail = driver.findElement(loggedGmailAccount).getAttribute("value");
         Map<String, String> result = dbUtil.getDataFromUserTable(gmail);
         if (result != null) {
             LOGGER.info("Full Name : " + result.get("FullName"));
-            assertEquals(expectedFullName, result.get("FullName"));
+            assertEquals(result.get("FullName"), expectedFullName);
             LOGGER.info("Mobile Number : " + result.get("MobileNumber"));
-            assertEquals(ExpectedMobileNumber, result.get("MobileNumber"));
+            assertEquals( result.get("MobileNumber"), expectedMobileNumber);
         } else {
             LOGGER.info("Db record has not updated Successfully.");
         }

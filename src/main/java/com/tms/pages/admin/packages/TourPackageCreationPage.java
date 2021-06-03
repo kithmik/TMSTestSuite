@@ -91,7 +91,7 @@ public class TourPackageCreationPage {
         Map<String, String> result = dbUtil.getDataFromTourPackagesTable();
         if (result != null) {
             LOGGER.info("Package Name : " + result.get("PackageName"));
-            assertEquals(expectedFullName, result.get("PackageName"));
+            assertEquals(result.get("PackageName") , expectedFullName);
         } else {
             LOGGER.info("No db record found for Package Name");
         }
