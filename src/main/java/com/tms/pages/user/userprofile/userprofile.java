@@ -1,13 +1,22 @@
 package com.tms.pages.user.userprofile;
 
 import com.tms.util.common.CommonSteps;
+import com.tms.util.dbutils.DbUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
+import java.util.Map;
+import java.util.logging.Logger;
+
+import static org.testng.AssertJUnit.assertEquals;
+
 public class userprofile {
     private WebDriver driver;
     private CommonSteps commonStepsObj;
+
+    private static final Logger LOGGER = Logger.getLogger(UserProfilePage.class.getName());
+    private static final DbUtil dbUtil = new DbUtil();
 
 
     public userprofile(WebDriver driver, CommonSteps commonStepsObj) {
@@ -78,6 +87,18 @@ public class userprofile {
         driver.findElement(By.xpath("//input[@id='password'][@required='']")).sendKeys(password);
         driver.findElement(By.name("signin")).click();
 //        ExcelUtil.setExcelFileSheet("Login");
+    }
+
+    public void verifyUserSignUpUsingDb(String user){
+        LOGGER.info(user);
+
+        String status = dbUtil.getRegisteredUser(user);
+        if (status != null) {
+            LOGGER.info("Status : " + status);
+            assertEquals("success", status);
+
+            LOGGER.info("User has registered Successfully.");
+        }
     }
 
 

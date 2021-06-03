@@ -8,7 +8,8 @@
     <test name="TMS UI Tests">
         <classes>
             <class name="com.tms.user.enquiry.EnquiryTest"/>
-            <class name="com.tms.user.booking.ManageBookingTest"/>
+<!--            <class name="com.tms.user.booking.ManageBookingTest"/>-->
+            <class name="com.tms.admin.booking.ManageBookingTest"/>
         </classes>
     </test>
 </suite>

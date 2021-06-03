@@ -7,6 +7,10 @@ import com.tms.util.excelutils.ExcelUtil;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+
+import static com.tms.util.extentreports.ExtentTestManager.startTest;
+import java.lang.reflect.Method;
+
 //@Listeners({ TestListners.class })
 public class UserProfile extends BaseTest {
 
@@ -27,28 +31,32 @@ public class UserProfile extends BaseTest {
 
 
     @Test
-    public void verifyThatUserCanSuccessfullyLoginIntoAdminPanel() throws InterruptedException {
+    public void verifyThatUserCanSuccessfullyLoginIntoAdminPanel(Method method) throws InterruptedException {
+        startTest(method.getName(), "verifyThatUserCanSuccessfullyLoginIntoAdminPanel");
         userprofileObj.clickSignInButton(ExcelUtil.getCellData(1,2),ExcelUtil.getCellData(1,1));
 //        commonStepsObj.saveTestResults(1,5);
 
     }
 
     @Test
-    public void verifyThatUserNotAllowedLoginWithWrongUsernameAndCorrectPassword() throws InterruptedException {
+    public void verifyThatUserNotAllowedLoginWithWrongUsernameAndCorrectPassword(Method method) throws InterruptedException {
+        startTest(method.getName(), "verifyThatUserNotAllowedLoginWithWrongUsernameAndCorrectPassword");
         userprofileObj.clickSignInButton(ExcelUtil.getCellData(2,2),ExcelUtil.getCellData(1,1));
 //        commonStepsObj.saveTestResults(1,5);
 
     }
 
     @Test
-    public void verifyThatUserNotAllowedLoginWithCorrectUsernameAndWrongPassword() throws InterruptedException {
+    public void verifyThatUserNotAllowedLoginWithCorrectUsernameAndWrongPassword(Method method) throws InterruptedException {
+        startTest(method.getName(), "verifyThatUserNotAllowedLoginWithCorrectUsernameAndWrongPassword");
         userprofileObj.clickSignInButton(ExcelUtil.getCellData(3,2),ExcelUtil.getCellData(1,1));
 //        commonStepsObj.saveTestResults(1,5);
 
     }
 
     @Test
-    public void verifyThatUserNotAllowedLoginWithEmptyUsernameAndEmptyPassword() throws InterruptedException {
+    public void verifyThatUserNotAllowedLoginWithEmptyUsernameAndEmptyPassword(Method method) throws InterruptedException {
+        startTest(method.getName(), "verifyThatUserNotAllowedLoginWithEmptyUsernameAndEmptyPassword");
         userprofileObj.clickSignInButton(ExcelUtil.getCellData(4,2),ExcelUtil.getCellData(1,1));
 //        commonStepsObj.saveTestResults(1,5);
 
@@ -56,13 +64,16 @@ public class UserProfile extends BaseTest {
 
 
     @Test
-    public void verifyThatNewUserCanSignUp() throws InterruptedException {
+    public void verifyThatNewUserCanSignUp(Method method) throws InterruptedException {
+        startTest(method.getName(), "verifyThatNewUserCanSignUp");
         userprofileObj.clickSignUp(ExcelUtil.getRowData(8));
+        userprofileObj.verifyUserSignUpUsingDb(ExcelUtil.getCellData(8,1));
 
     }
 
     @Test
-    public void verifyThatNewUserCanSignUpWithAlreadyGivenUserDetails() throws InterruptedException {
+    public void verifyThatNewUserCanSignUpWithAlreadyGivenUserDetails(Method method) throws InterruptedException {
+        startTest(method.getName(), "verifyThatNewUserCanSignUpWithAlreadyGivenUserDetails");
         userprofileObj.clickSignUp(ExcelUtil.getRowData(8));
         userprofileObj.signAgain(ExcelUtil.getCellData(8,3),ExcelUtil.getCellData(8,4));
     }

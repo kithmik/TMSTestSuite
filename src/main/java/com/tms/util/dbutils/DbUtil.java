@@ -145,4 +145,28 @@ public class DbUtil {
         }
         return dbResults;
     }
+
+
+    public static String getRegisteredUser(String user) {
+        makeJDBCConnection();
+        String result ="";
+
+        try {
+            String getQueryStatement = "SELECT * FROM tblusers WHERE FullName ='" + user +"'";
+            prepareStat = conn.prepareStatement(getQueryStatement);
+            ResultSet rs = prepareStat.executeQuery();
+
+
+            if(rs!=null){
+               result = "success";
+            }else{
+               result = "fail";
+            }
+            prepareStat.close();
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       return result;
+    }
 }

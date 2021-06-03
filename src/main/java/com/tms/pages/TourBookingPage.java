@@ -61,10 +61,10 @@ public class TourBookingPage {
         Assert.assertEquals(ValidationMessage,expectedResult);
 
     }
-    public void saveTestResults(int row, int column) {
-        ExcelUtil.rowNumber = row ;
-        ExcelUtil.columnNumber = column;
-    }
+//    public void saveTestResults(int row, int column) {
+//        ExcelUtil.rowNumber = row ;
+//        ExcelUtil.columnNumber = column;
+//    }
 
 //driver.findElement(fullName).getAttribute("validationMessage")
 
