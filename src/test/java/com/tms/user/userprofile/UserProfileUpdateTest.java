@@ -4,12 +4,11 @@ import com.tms.admin.packages.PackageCreateAndUpdateTest;
 import com.tms.base.BaseTest;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
 import com.tms.pages.user.userprofile.UserProfilePage;
+import com.tms.pages.user.userprofile.UserSignInPage;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.lang.reflect.Method;
 import java.util.logging.Logger;
 import static com.tms.util.excelutils.ExcelUtil.setExcelFileSheet;
@@ -22,24 +21,23 @@ import static com.tms.util.extentreports.ExtentTestManager.startTest;
  *  2.verifyUserProfileUpdateWithInvalidDataTypeForMobilNumber
  */
 
-public class UserProfileTest extends BaseTest {
+public class UserProfileUpdateTest extends BaseTest {
+
+    private CommonSteps commonStepsObj;
+    private UserSignInPage userSignInPageObj;
     private UserViewPieceObjectPage userViewPieceObjectPage;
     private UserProfilePage userProfilePage;
-    private CommonSteps commonStepsObj;
     private static final Logger LOGGER = Logger.getLogger(PackageCreateAndUpdateTest.class.getName());
 
     @BeforeClass
     public void setUp() throws Exception {
         initialization();
+        commonStepsObj = new CommonSteps(driver);
+        userSignInPageObj = new UserSignInPage(driver, commonStepsObj);
         userViewPieceObjectPage = new UserViewPieceObjectPage(driver,commonStepsObj);
         userProfilePage = new UserProfilePage(driver);
-        driver.findElement(By.xpath("//*[contains(text(),'/ Sign In')]")).click();
-        Thread.sleep(3000);
-        driver.findElement(By.id("email")).click();
-        driver.findElement(By.id("email")).sendKeys("anuj@gmail.com");
-        driver.findElement(By.xpath("//input[@id=\"password\"][@required=\"\"]")).click();
-        driver.findElement(By.xpath("//input[@id=\"password\"][@required=\"\"]")).sendKeys("Test@123");
-        driver.findElement(By.name("signin")).click();
+        ExcelUtil.setExcelFileSheet("UserLogin");
+        userSignInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
         setExcelFileSheet("UserProfile");
     }
 

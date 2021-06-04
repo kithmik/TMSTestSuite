@@ -5,8 +5,9 @@ import com.tms.pages.admin.navigation.AdminViewPieceObjectPage;
 import com.tms.pages.admin.packages.ManagePackagePage;
 import com.tms.pages.admin.packages.TourPackageCreationPage;
 import com.tms.pages.admin.packages.UpdateTourPackagePage;
+import com.tms.pages.admin.userprofile.AdminSignInPage;
+import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
-import org.openqa.selenium.By;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 import java.lang.reflect.Method;
@@ -26,6 +27,8 @@ import static com.tms.util.extentreports.ExtentTestManager.startTest;
  */
 public class PackageCreateAndUpdateTest extends BaseTest {
 
+    private CommonSteps commonStepsObj;
+    private AdminSignInPage adminSignInPageObj;
     private AdminViewPieceObjectPage adminViewPieceObjectPageObj;
     private TourPackageCreationPage tourPackageCreationPageObj;
     private ManagePackagePage managePackagePageObj;
@@ -34,19 +37,17 @@ public class PackageCreateAndUpdateTest extends BaseTest {
 
 
     @BeforeClass
-    public void setUp(){
+    public void setUp() throws InterruptedException {
         LOGGER.info("*********** Set Up Test **********");
         initialization();
+        commonStepsObj = new CommonSteps(driver);
+        adminSignInPageObj = new AdminSignInPage(driver, commonStepsObj);
         adminViewPieceObjectPageObj = new AdminViewPieceObjectPage(driver);
         tourPackageCreationPageObj = new TourPackageCreationPage(driver);
         managePackagePageObj = new ManagePackagePage(driver);
         updateTourPackagePageObj = new UpdateTourPackagePage(driver);
-        driver.findElement(By.xpath("//a[contains(text(),'Admin Login')]")).click();
-        driver.findElement(By.className("name")).click();
-        driver.findElement(By.className("name")).sendKeys("admin");
-        driver.findElement(By.className("password")).click();
-        driver.findElement(By.className("password")).sendKeys("Test@123");
-        driver.findElement(By.className("login")).click();
+        ExcelUtil.setExcelFileSheet("AdminLogin");
+        adminSignInPageObj.adminLoginWithExcelData(ExcelUtil.getRowData(1));
         setExcelFileSheet("Package");
 
     }
