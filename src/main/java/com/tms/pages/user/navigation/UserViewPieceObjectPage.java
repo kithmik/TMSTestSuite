@@ -27,6 +27,9 @@ public class UserViewPieceObjectPage {
         this.commonStepsObj = commonStepsObj;
     }
 
+    public UserViewPieceObjectPage(WebDriver driver) {
+    }
+
     public void clickOnSignUp() {
         LOGGER.info("clickOnSignUp | UserViewPieceObjectPage");
         driver.findElement(signUpBtn).click();
