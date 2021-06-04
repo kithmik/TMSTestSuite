@@ -15,23 +15,22 @@ public class UserViewPieceObjectPage {
 
     private WebDriver driver;
     private CommonSteps commonStepsObj;
-    private CommonSteps commonSteps;
+    private By signUpBtn = By.xpath("//a[contains(text(),'Sign Up')]");
+    private By myProfileBtn = By.xpath("//a[@href='profile.php']");
+    private By enquiryTab = By.xpath("//a[contains(text(),' Enquiry ')]");
+    private By tourPackageElement = By.xpath("//a[@href='package-list.php']");
+    private static final Logger LOGGER = Logger.getLogger(UserViewPieceObjectPage.class.getName());
+
 
     public UserViewPieceObjectPage (WebDriver driver, CommonSteps commonStepsObj){
         this.driver = driver;
         this.commonStepsObj = commonStepsObj;
     }
 
-    public UserViewPieceObjectPage (WebDriver driver){
-        this.driver = driver;
-        commonSteps = new CommonSteps(driver);
-
+    public void clickOnSignUp() {
+        LOGGER.info("clickOnSignUp | UserViewPieceObjectPage");
+        driver.findElement(signUpBtn).click();
     }
-
-    private By myProfileBtn = By.xpath("//a[@href='profile.php']");
-    private By enquiryTab = By.xpath("//a[contains(text(),' Enquiry ')]");
-    private By tourPackageElement = By.xpath("//a[@href='package-list.php']");
-    private static final Logger LOGGER = Logger.getLogger(UserViewPieceObjectPage.class.getName());
 
     public void clickOnMyProfile() {
         LOGGER.info("clickOnMyProfile | UserViewPieceObjectPage");
@@ -45,7 +44,7 @@ public class UserViewPieceObjectPage {
 
     public void clickOnTourPackageMenu() {
         LOGGER.info("clickOnTourPackageMenu | UserViewPieceObjectPage");
-        commonSteps.waitUntilNextElementAppears(tourPackageElement,4000);
+        commonStepsObj.waitUntilNextElementAppears(tourPackageElement,4000);
         driver.findElement(tourPackageElement).click();
     }
 
