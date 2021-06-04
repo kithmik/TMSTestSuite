@@ -2,7 +2,6 @@ package com.tms.util.csvutils;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import java.io.FileReader;

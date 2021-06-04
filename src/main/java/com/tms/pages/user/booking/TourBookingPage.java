@@ -72,7 +72,7 @@ public class TourBookingPage {
     }
 
     public void verifyTourDetailOfSubmittedEnquiryInTheDB(String expectedFromDate,String expectedToDate,String expectedComment){
-        Map<String, String> result = dbUtil.getDataFromTourPackagesTable();
+        Map<String, String> result = dbUtil.getDataFromBookingTable();
         if (result != null) {
             LOGGER.info("From Date : " + result.get("FromDate"));
             assertEquals(expectedFromDate, result.get("FromDate"));

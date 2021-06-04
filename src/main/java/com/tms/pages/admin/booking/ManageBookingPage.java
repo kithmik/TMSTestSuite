@@ -43,7 +43,8 @@ public class ManageBookingPage {
         driver.findElement(confirmElement).click();
     }
 
-    public void verifyAdminActionBookingMessageWithExcel(String expectedResult){
+    public void verifyAdminActionBookingMessageWithExcel(String expectedResult) throws InterruptedException {
+        commonStepsObj.waitUntilNextElementAppears(bookingConfirmElement,4000);
         String ValidationMessage = driver.findElement(bookingConfirmElement).getText();
         Assert.assertEquals(ValidationMessage,expectedResult);
     }
@@ -56,7 +57,7 @@ public class ManageBookingPage {
     }
 
     public void verifyAdminTourDetailOfSubmittedEnquiryInTheDB(String expectedAction) {
-        Map<String, String> result = dbUtil.getDataFromTourPackagesTable();
+        Map<String, String> result = dbUtil.getDataFromBookingTable();
         if (result != null) {
             LOGGER.info("Action : " + result.get("status"));
             assertEquals(expectedAction, result.get("status"));

@@ -1,19 +1,23 @@
 package com.tms.user.booking;
 
 import com.tms.base.BaseTest;
-import com.tms.pages.admin.navigation.AdminViewPieceObjectPage;
 import com.tms.pages.user.booking.TourBookingPage;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
+import com.tms.pages.user.userprofile.UserSignInAndSignUpPage;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
-import org.openqa.selenium.By;
 import org.testng.annotations.*;
+
+import java.lang.reflect.Method;
+
+import static com.tms.util.extentreports.ExtentTestManager.startTest;
 
 public class TourBookingTest extends BaseTest {
 
     private CommonSteps commonStepsObj;
     private TourBookingPage tourBookingPageObj;
     private UserViewPieceObjectPage userViewPieceObjectPageObj;
+    private UserSignInAndSignUpPage userSignInAndSignUpPageObj;
 
     @BeforeClass
     public void setup() throws InterruptedException {
@@ -21,21 +25,19 @@ public class TourBookingTest extends BaseTest {
         commonStepsObj = new CommonSteps(driver);
         tourBookingPageObj = new TourBookingPage(driver, commonStepsObj);
         userViewPieceObjectPageObj = new UserViewPieceObjectPage(driver);
+        userSignInAndSignUpPageObj = new UserSignInAndSignUpPage(driver, commonStepsObj);
 
-        driver.findElement(By.xpath("//*[contains(text(),'/ Sign In')]")).click();
-        Thread.sleep(3000);
-        driver.findElement(By.id("email")).click();
-        driver.findElement(By.id("email")).sendKeys("anuj@gmail.com");
-        driver.findElement(By.xpath("//input[@id='password'][@required='']")).click();
-        driver.findElement(By.xpath("//input[@id='password'][@required='']")).sendKeys("Test@123");
-        driver.findElement(By.name("signin")).click();
+        ExcelUtil.setExcelFileSheet("Login");
+        //User login
+        userSignInAndSignUpPageObj.clickSignInButton(ExcelUtil.getCellData(1,1),ExcelUtil.getCellData(1,2));
 
         ExcelUtil.setExcelFileSheet("TourBooking");
 
     }
 
     @Test(priority = 1)
-    public void verifyThatUserCanSuccessfullyBookTheTourPackageByAddingAllFields() {
+    public void verifyThatUserCanSuccessfullyBookTheTourPackageByAddingAllFields(Method method) {
+        startTest(method.getName(), "Verify that user can successfully book the tour package by adding all fields");
         userViewPieceObjectPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(1));
@@ -44,7 +46,8 @@ public class TourBookingTest extends BaseTest {
 
     }
     @Test(priority = 2)
-    public void verifyThatUserCanSuccessfullyBookTheTourPackageByAddingOnlyMandatoryFields() throws InterruptedException {
+    public void verifyThatUserCanSuccessfullyBookTheTourPackageByAddingOnlyMandatoryFields(Method method) {
+        startTest(method.getName(), "Verify that user can successfully book the tour package by adding only mandatory fields");
         userViewPieceObjectPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(2));
@@ -54,7 +57,8 @@ public class TourBookingTest extends BaseTest {
     }
 
     @Test(priority = 3)
-    public void whenEnteringToDateVerifyThatUserCantAddADateWhichIsBeforeFromDate() throws InterruptedException {
+    public void whenEnteringToDateVerifyThatUserCantAddADateWhichIsBeforeFromDate(Method method) {
+        startTest(method.getName(), "When entering To date, verify that user can't add a date which is before From date");
         tourBookingPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(4));
@@ -62,7 +66,8 @@ public class TourBookingTest extends BaseTest {
 
     }
     @Test(priority = 4)
-    public void verifyThatUserCantSelectAPastDateFromNowAsTheFromDate() throws InterruptedException {
+    public void verifyThatUserCantSelectAPastDateFromNowAsTheFromDate(Method method) {
+        startTest(method.getName(), "Verify that user can't select a past date from now as the From date");
         tourBookingPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(5));
@@ -70,7 +75,8 @@ public class TourBookingTest extends BaseTest {
 
     }
     @Test(priority = 5)
-    public void verifyThatUserCantSubmitTheBookingFormByAddingInvalidDataForFromDateAndToDate() throws InterruptedException {
+    public void verifyThatUserCantSubmitTheBookingFormByAddingInvalidDataForFromDateAndToDate(Method method) {
+        startTest(method.getName(), "Verify that user can't submit the booking form by adding invalid data for From date and To date");
         tourBookingPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(6));
@@ -78,13 +84,22 @@ public class TourBookingTest extends BaseTest {
 
     }
     @Test(priority = 6)
-    public void verifyThatUserCantSubmitTheBookFormByAddingOnlyOptionalFields() throws InterruptedException {
+    public void verifyThatUserCantSubmitTheBookFormByAddingOnlyOptionalFields(Method method) {
+        startTest(method.getName(), "Verify that user cant submit the book form by adding only optional fields");
         tourBookingPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(3));
         tourBookingPageObj.verifyValidationMessageWithExcel(ExcelUtil.getCellData(3,4));
 
     }
+
+//    @AfterClass
+//    public void logoutUser() throws InterruptedException {
+//        JavascriptExecutor js = (JavascriptExecutor) driver;
+//        js.executeScript("window.scrollBy(0,-1000)");
+//
+//        driver.findElement(By.xpath("//*[contains(text(),'/ Logout')]")).click();
+//    }
 
 
 }

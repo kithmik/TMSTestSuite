@@ -3,12 +3,20 @@ package com.tms.admin.booking;
 import com.tms.base.BaseTest;
 import com.tms.pages.admin.navigation.AdminViewPieceObjectPage;
 import com.tms.pages.admin.booking.ManageBookingPage;
+import com.tms.pages.admin.userprofile.AdminSignInPage;
 import com.tms.pages.user.booking.TourBookingPage;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
+import com.tms.pages.user.userprofile.UserSignInAndSignUpPage;
+import com.tms.admin.userprofile.AdminSignInTest;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.*;
+
+import java.lang.reflect.Method;
+
+import static com.tms.util.extentreports.ExtentTestManager.startTest;
 
 
 public class ManageBookingTest extends BaseTest {
@@ -16,9 +24,11 @@ public class ManageBookingTest extends BaseTest {
     private CommonSteps commonStepsObj;
     private ManageBookingPage manageBookingPageObj;
     private TourBookingPage tourBookingPageObj;
-
     private AdminViewPieceObjectPage adminViewPieceObjectPageObj;
     private UserViewPieceObjectPage userViewPieceObjectPageObj;
+    private UserSignInAndSignUpPage userSignInAndSignUpPageObj;
+    private AdminSignInPage adminSignInPageObj;
+
 
     @BeforeMethod
     public void setup() throws InterruptedException {
@@ -31,18 +41,16 @@ public class ManageBookingTest extends BaseTest {
         manageBookingPageObj = new ManageBookingPage(driver, commonStepsObj);
         tourBookingPageObj = new TourBookingPage(driver, commonStepsObj);
         userViewPieceObjectPageObj = new UserViewPieceObjectPage(driver);
-
+        userSignInAndSignUpPageObj = new UserSignInAndSignUpPage(driver, commonStepsObj);
         adminViewPieceObjectPageObj = new AdminViewPieceObjectPage(driver);
-        ExcelUtil.setExcelFileSheet("TourBooking");
+        adminSignInPageObj = new AdminSignInPage(driver, commonStepsObj);
 
-        //user login
-        driver.findElement(By.xpath("//*[contains(text(),'/ Sign In')]")).click();
-        Thread.sleep(3000);
-        driver.findElement(By.id("email")).click();
-        driver.findElement(By.id("email")).sendKeys("anuj@gmail.com");
-        driver.findElement(By.xpath("//input[@id='password'][@required='']")).click();
-        driver.findElement(By.xpath("//input[@id='password'][@required='']")).sendKeys("Test@123");
-        driver.findElement(By.name("signin")).click();
+
+        ExcelUtil.setExcelFileSheet("Login");
+        //User login
+        userSignInAndSignUpPageObj.clickSignInButton(ExcelUtil.getCellData(1,1),ExcelUtil.getCellData(1,2));
+
+        ExcelUtil.setExcelFileSheet("TourBooking");
 
         //booking
         userViewPieceObjectPageObj.clickOnTourPackageMenu();
@@ -64,7 +72,8 @@ public class ManageBookingTest extends BaseTest {
     }
 
     @Test(priority = 1)
-    public void verifyThatAdminCanConfirmTheSuccessfullyAddedBooking() throws InterruptedException {
+    public void verifyThatAdminCanConfirmTheSuccessfullyAddedBooking(Method method) throws InterruptedException {
+        startTest(method.getName(), "Verify that admin can confirm the successfully added booking");
         adminViewPieceObjectPageObj.clickOnManageBooking();
         manageBookingPageObj.confirmTheTourPackageByAdmin();
         commonStepsObj.clickOkButtonOfConfirmPromt();
@@ -77,7 +86,8 @@ public class ManageBookingTest extends BaseTest {
 
 
     @Test(priority = 2)
-    public void verifyThatAdminCanCancelTheSuccessfullyAddedBooking() throws InterruptedException {
+    public void verifyThatAdminCanCancelTheSuccessfullyAddedBooking(Method method) throws InterruptedException {
+        startTest(method.getName(), "Verify that admin can cancel the successfully added booking");
         adminViewPieceObjectPageObj.clickOnManageBooking();
         manageBookingPageObj.cancelTheTourPackageByAdmin();
         commonStepsObj.clickOkButtonOfConfirmPromt();
@@ -89,8 +99,16 @@ public class ManageBookingTest extends BaseTest {
 
 
     @AfterMethod
-    public void logoutAdmin(){
+    public void logoutAdmin() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,-1000)");
+        Thread.sleep(2000);
+
+    //    commonStepsObj.waitUntilElementPresence(By.className("dropdown-toggle"),2000);
         driver.findElement(By.className("dropdown-toggle")).click();
+        Thread.sleep(2000);
+
+       // commonStepsObj.waitUntilElementPresence(By.xpath("//*[@href='logout.php']"),4000);
         driver.findElement(By.xpath("//*[@href='logout.php']")).click();
         driver.get(properties.getProperty("baseUrl"));
 
