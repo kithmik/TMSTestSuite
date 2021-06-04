@@ -150,18 +150,18 @@ public class DbUtil {
     public static String getRegisteredUser(String user) {
         makeJDBCConnection();
         String result ="";
+        result = "fail";
+
 
         try {
             String getQueryStatement = "SELECT * FROM tblusers WHERE FullName ='" + user +"'";
             prepareStat = conn.prepareStatement(getQueryStatement);
             ResultSet rs = prepareStat.executeQuery();
 
-
-            if(rs!=null){
-               result = "success";
-            }else{
-               result = "fail";
+            while (rs.next()) {
+                result = "success";
             }
+
             prepareStat.close();
             conn.close();
         } catch (SQLException e) {

@@ -26,7 +26,7 @@ public class UserSignInAndSignUpPage {
     }
 
 
-    public void clickOnDetailsButton(String admin,String adminPassword) {
+    public void clickAdminLogin(String admin, String adminPassword) {
 
         By username = By.name("username");
         By password = By.name("password");

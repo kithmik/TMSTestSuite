@@ -22,7 +22,7 @@ public class AdminSignInTest extends BaseTest {
         commonStepsObj = new CommonSteps(driver);
         userSignInAndSignUpPageObj = new UserSignInAndSignUpPage(driver, commonStepsObj);
 
-        ExcelUtil.setExcelFileSheet("Login");
+        ExcelUtil.setExcelFileSheet("Login-Admin");
 
     }
 
@@ -32,7 +32,7 @@ public class AdminSignInTest extends BaseTest {
     @Test
     public void verifyThatAdminCanSuccessfullyLoginIntoAdminPanel(Method method) throws InterruptedException {
         startTest(method.getName(), "verifyThatAdminCanSuccessfullyLoginIntoAdminPanel");
-        userSignInAndSignUpPageObj.clickSignInButton(ExcelUtil.getCellData(1,2),ExcelUtil.getCellData(1,1));
+        userSignInAndSignUpPageObj.clickAdminLogin(ExcelUtil.getCellData(1,1),ExcelUtil.getCellData(1,2));
 //        commonStepsObj.saveTestResults(1,5);
 
     }
@@ -41,7 +41,7 @@ public class AdminSignInTest extends BaseTest {
     public void verifyThatAdminNotAllowedLoginWithWrongUsernameAndCorrectPassword(Method method) throws InterruptedException {
         startTest(method.getName(), "verifyThatAdminNotAllowedLoginWithWrongUsernameAndCorrectPassword");
 
-        userSignInAndSignUpPageObj.clickSignInButton(ExcelUtil.getCellData(2,2),ExcelUtil.getCellData(1,1));
+        userSignInAndSignUpPageObj.clickAdminLogin(ExcelUtil.getCellData(2,1),ExcelUtil.getCellData(1,2));
 //        commonStepsObj.saveTestResults(1,5);
 
     }
@@ -50,7 +50,7 @@ public class AdminSignInTest extends BaseTest {
     public void verifyThatAdminNotAllowedLoginWithCorrectUsernameAndWrongPassword(Method method) throws InterruptedException {
         startTest(method.getName(), "verifyThatAdminNotAllowedLoginWithCorrectUsernameAndWrongPassword");
 
-        userSignInAndSignUpPageObj.clickSignInButton(ExcelUtil.getCellData(3,2),ExcelUtil.getCellData(1,1));
+        userSignInAndSignUpPageObj.clickAdminLogin(ExcelUtil.getCellData(3,1),ExcelUtil.getCellData(1,2));
 //        commonStepsObj.saveTestResults(1,5);
 
     }
@@ -59,7 +59,7 @@ public class AdminSignInTest extends BaseTest {
     public void verifyThatUAdminNotAllowedLoginWithEmptyUsernameAndEmptyPassword(Method method) throws InterruptedException {
         startTest(method.getName(), "verifyThatUAdminNotAllowedLoginWithEmptyUsernameAndEmptyPassword");
 
-        userSignInAndSignUpPageObj.clickSignInButton(ExcelUtil.getCellData(4,2),ExcelUtil.getCellData(1,1));
+        userSignInAndSignUpPageObj.clickAdminLogin(ExcelUtil.getCellData(4,1),ExcelUtil.getCellData(1,2));
 //        commonStepsObj.saveTestResults(1,5);
 
     }

@@ -63,20 +63,7 @@ public class UserSignInAndSignUpTest extends BaseTest {
     }
 
 
-    @Test
-    public void verifyThatNewUserCanSignUp(Method method) throws InterruptedException {
-        startTest(method.getName(), "verifyThatNewUserCanSignUp");
-        userSignInAndSignUpPageObj.clickSignUp(ExcelUtil.getRowData(8));
-        userSignInAndSignUpPageObj.verifyUserSignUpUsingDb(ExcelUtil.getCellData(8,1));
 
-    }
-
-    @Test
-    public void verifyThatNewUserCanSignUpWithAlreadyGivenUserDetails(Method method) throws InterruptedException {
-        startTest(method.getName(), "verifyThatNewUserCanSignUpWithAlreadyGivenUserDetails");
-        userSignInAndSignUpPageObj.clickSignUp(ExcelUtil.getRowData(8));
-        userSignInAndSignUpPageObj.signAgain(ExcelUtil.getCellData(8,3),ExcelUtil.getCellData(8,4));
-    }
 
 }
 
