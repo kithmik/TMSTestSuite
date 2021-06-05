@@ -30,7 +30,7 @@ public class ManageEnquiryPage {
     }
 
     private By pendingElement = By.xpath("//table/tbody/tr[last()]/td[last()]/span/a[1]");
-    private By successfulMessage =  By.xpath("//*[@class= 'succWrap']");
+    private By successfulMessage =  By.xpath("//div[@class='succWrap']");
 
     public void readEnquiryByAdmin(){
         LOGGER.info("Verifying read enquiry by admin");
@@ -43,6 +43,7 @@ public class ManageEnquiryPage {
     }
 
     public void verifySuccessFullReadMessage(String expectedReadMessage){
+        commonStepsObj.waitUntilElementPresence(successfulMessage,4000);
         String successfulReadMessage = driver.findElement(successfulMessage).getText();
         assertEquals(successfulReadMessage, expectedReadMessage);
 

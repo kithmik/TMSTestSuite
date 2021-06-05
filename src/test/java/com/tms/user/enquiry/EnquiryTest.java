@@ -75,14 +75,14 @@ public class EnquiryTest extends BaseTest {
     public void verifySubmitEnquiryWithEmptyValueForFullNameTextField(Method method){
         startTest(method.getName(), "Verify that user is unable to submit an enquiry with empty value for the Full name text field");
         enquiryPage.submitEnquiry(ExcelUtil.getRowData(6));
-        enquiryPage.verifyValidationMessageWhenHavingEmptyTextFields("fname", ExcelUtil.getCellData(6,7));
+        enquiryPage.verifyValidationMessageWhenHavingEmptyTextFields("Full name", ExcelUtil.getCellData(6,7));
     }
 
     @Test(priority = 7)
     public void verifySubmitEnquiryWithEmptyValueForDescriptionTextField(Method method){
         startTest(method.getName(), "Verify that user is unable to submit an enquiry with empty value for the Description text field");
         enquiryPage.submitEnquiry(ExcelUtil.getRowData(7));
-        enquiryPage.verifyValidationMessageWhenHavingEmptyTextFields("description", ExcelUtil.getCellData(7,7));
+        enquiryPage.verifyValidationMessageWhenHavingEmptyTextFields("Description", ExcelUtil.getCellData(7,7));
     }
 
 }

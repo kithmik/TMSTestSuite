@@ -63,8 +63,27 @@ public class EnquiryPage {
         assertEquals(validationMessage, expectedValidationMessage);
     }
 
-    public void verifyValidationMessageWhenHavingEmptyTextFields(String emptyTextFieldId, String expectedValidationMessage){
-        String validationMessage = driver.findElement(By.id(emptyTextFieldId)).getAttribute("validationMessage");
+    public void verifyValidationMessageWhenHavingEmptyTextFields(String emptyTextFieldName, String expectedValidationMessage){
+        String validationMessage="";
+
+        switch (emptyTextFieldName) {
+            case "Full name":
+            validationMessage = driver.findElement(fullName).getAttribute("validationMessage");
+                break;
+            case "Email":
+                validationMessage = driver.findElement(email).getAttribute("validationMessage");
+                break;
+            case "Mobile No":
+            validationMessage = driver.findElement(mobileNo).getAttribute("validationMessage");
+                break;
+            case "Subject":
+                validationMessage = driver.findElement(subject).getAttribute("validationMessage");
+                break;
+            case "Description":
+                validationMessage = driver.findElement(description).getAttribute("validationMessage");
+                break;
+        }
+
         assertEquals(validationMessage, expectedValidationMessage);
 
     }
