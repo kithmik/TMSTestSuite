@@ -38,7 +38,7 @@ public class SignInTest extends BaseTest {
 
 
     @Test(priority = 2)
-    public void verifyThatUserNotAllowedLoginWithWrongUsernameAndCorrectPassword(Method method) {
+    public void verifyThatUserNotAllowedLoginWithWrongUsernameAndCorrectPassword(Method method) throws InterruptedException {
         startTest(method.getName(), "Verify that user not allowed login with wrong username and correct password");
         userSignInPageObj.userInvalidLoginWithExcelData(ExcelUtil.getRowData(2));
         commonStepsObj.clickOkButtonOfConfirmPromt();
@@ -54,7 +54,7 @@ public class SignInTest extends BaseTest {
     }
 
     @Test(priority = 4)
-    public void verifyThatUUserNotAllowedLoginWithEmptyUsernameAndEmptyPassword(Method method)  {
+    public void verifyThatUUserNotAllowedLoginWithEmptyUsernameAndEmptyPassword(Method method) throws InterruptedException {
         startTest(method.getName(), "Verify that user not allowed login with empty username and empty password");
         userSignInPageObj.userInvalidLoginWithExcelData(ExcelUtil.getRowData(4));
         userSignInPageObj.verifyUserLoginWithExcel(ExcelUtil.getCellData(4,4));
