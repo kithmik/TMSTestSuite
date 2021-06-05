@@ -6,17 +6,19 @@ import com.tms.pages.admin.booking.ManageBookingPage;
 import com.tms.pages.admin.userprofile.AdminSignInPage;
 import com.tms.pages.user.booking.TourBookingPage;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
-import com.tms.pages.user.userprofile.UserSignInAndSignUpPage;
-import com.tms.admin.userprofile.AdminSignInTest;
+import com.tms.pages.user.userprofile.UserSignInPage;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
-import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.*;
-
 import java.lang.reflect.Method;
-
 import static com.tms.util.extentreports.ExtentTestManager.startTest;
+
+/**
+ * @author Kithmi Kalpana
+ * Test Class for manage booking by admin
+ *
+ */
 
 
 public class ManageBookingTest extends BaseTest {
@@ -26,7 +28,7 @@ public class ManageBookingTest extends BaseTest {
     private TourBookingPage tourBookingPageObj;
     private AdminViewPieceObjectPage adminViewPieceObjectPageObj;
     private UserViewPieceObjectPage userViewPieceObjectPageObj;
-    private UserSignInAndSignUpPage userSignInAndSignUpPageObj;
+    private UserSignInPage userSignInPageObj;
     private AdminSignInPage adminSignInPageObj;
 
 
@@ -41,33 +43,30 @@ public class ManageBookingTest extends BaseTest {
         manageBookingPageObj = new ManageBookingPage(driver, commonStepsObj);
         tourBookingPageObj = new TourBookingPage(driver, commonStepsObj);
         userViewPieceObjectPageObj = new UserViewPieceObjectPage(driver);
-        userSignInAndSignUpPageObj = new UserSignInAndSignUpPage(driver, commonStepsObj);
+        userSignInPageObj = new UserSignInPage(driver, commonStepsObj);
         adminViewPieceObjectPageObj = new AdminViewPieceObjectPage(driver);
         adminSignInPageObj = new AdminSignInPage(driver, commonStepsObj);
 
 
-        ExcelUtil.setExcelFileSheet("Login");
-        //User login
-        userSignInAndSignUpPageObj.clickSignInButton(ExcelUtil.getCellData(1,1),ExcelUtil.getCellData(1,2));
+        ExcelUtil.setExcelFileSheet("UserLogin");
+        //User login into the application
+        userSignInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
 
         ExcelUtil.setExcelFileSheet("TourBooking");
-
-        //booking
+        //User booking the tour package
         userViewPieceObjectPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(1));
 
         //user logout
-        driver.findElement(By.xpath("//*[contains(text(),'/ Logout')]")).click();
+        userSignInPageObj.userLogout();
 
-        //admin login
-        driver.findElement(By.xpath("//*[contains(text(),'Admin Login')]")).click();
-        Thread.sleep(3000);
-        driver.findElement(By.name("username")).click();
-        driver.findElement(By.name("username")).sendKeys("admin");
-        driver.findElement(By.name("password")).click();
-        driver.findElement(By.name("password")).sendKeys("Test@123");
-        driver.findElement(By.name("login")).click();
+        ExcelUtil.setExcelFileSheet("AdminLogin");
+        //admin login into the admin panel
+        adminSignInPageObj.adminLoginWithExcelData(ExcelUtil.getRowData(1));
+
+        ExcelUtil.setExcelFileSheet("TourBooking");
+
 
     }
 
@@ -104,12 +103,7 @@ public class ManageBookingTest extends BaseTest {
         js.executeScript("window.scrollBy(0,-1000)");
         Thread.sleep(2000);
 
-    //    commonStepsObj.waitUntilElementPresence(By.className("dropdown-toggle"),2000);
-        driver.findElement(By.className("dropdown-toggle")).click();
-        Thread.sleep(2000);
-
-       // commonStepsObj.waitUntilElementPresence(By.xpath("//*[@href='logout.php']"),4000);
-        driver.findElement(By.xpath("//*[@href='logout.php']")).click();
+        adminSignInPageObj.adminLogout();
         driver.get(properties.getProperty("baseUrl"));
 
     }

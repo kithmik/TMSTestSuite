@@ -14,6 +14,12 @@ import java.util.logging.Logger;
 
 import static org.testng.Assert.assertEquals;
 
+/**
+ * @author Kithmi Kalpana
+ * Page Class for manage tour package by admin
+ *
+ */
+
 public class ManageBookingPage {
     private WebDriver driver;
     private CommonSteps commonStepsObj;
@@ -43,14 +49,15 @@ public class ManageBookingPage {
         driver.findElement(confirmElement).click();
     }
 
-    public void verifyAdminActionBookingMessageWithExcel(String expectedResult) throws InterruptedException {
+    public void verifyAdminActionBookingMessageWithExcel(String expectedResult) {
+        commonStepsObj.scrollPageToTop();
         commonStepsObj.waitUntilNextElementAppears(bookingConfirmElement,4000);
         String ValidationMessage = driver.findElement(bookingConfirmElement).getText();
         Assert.assertEquals(ValidationMessage,expectedResult);
     }
 
     public void verifyApplicationActionBookingMessageWithExcel(String expectedResult) throws InterruptedException {
-        Thread.sleep(3000);
+        commonStepsObj.Wait();
         String ValidationMessage = driver.findElement(ActionElement).getAttribute("value");
         System.out.println(driver.findElement(ActionElement).getAttribute("value"));
         Assert.assertEquals(ValidationMessage,expectedResult);

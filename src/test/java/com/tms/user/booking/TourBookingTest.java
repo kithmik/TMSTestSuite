@@ -3,12 +3,16 @@ package com.tms.user.booking;
 import com.tms.base.BaseTest;
 import com.tms.pages.user.booking.TourBookingPage;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
-import com.tms.pages.user.userprofile.UserSignInAndSignUpPage;
+import com.tms.pages.user.userprofile.UserSignInPage;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
 import org.testng.annotations.*;
-
 import java.lang.reflect.Method;
+
+/**
+ * @author Kithmi Kalpana
+ * Test Class for book tour package by user
+ */
 
 import static com.tms.util.extentreports.ExtentTestManager.startTest;
 
@@ -17,7 +21,7 @@ public class TourBookingTest extends BaseTest {
     private CommonSteps commonStepsObj;
     private TourBookingPage tourBookingPageObj;
     private UserViewPieceObjectPage userViewPieceObjectPageObj;
-    private UserSignInAndSignUpPage userSignInAndSignUpPageObj;
+    private UserSignInPage userSignInPageObj;
 
     @BeforeClass
     public void setup() throws InterruptedException {
@@ -25,11 +29,11 @@ public class TourBookingTest extends BaseTest {
         commonStepsObj = new CommonSteps(driver);
         tourBookingPageObj = new TourBookingPage(driver, commonStepsObj);
         userViewPieceObjectPageObj = new UserViewPieceObjectPage(driver);
-        userSignInAndSignUpPageObj = new UserSignInAndSignUpPage(driver, commonStepsObj);
+        userSignInPageObj = new UserSignInPage(driver, commonStepsObj);
 
-        ExcelUtil.setExcelFileSheet("Login");
-        //User login
-        userSignInAndSignUpPageObj.clickSignInButton(ExcelUtil.getCellData(1,1),ExcelUtil.getCellData(1,2));
+        ExcelUtil.setExcelFileSheet("UserLogin");
+        //User login into the application
+        userSignInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
 
         ExcelUtil.setExcelFileSheet("TourBooking");
 
@@ -80,7 +84,7 @@ public class TourBookingTest extends BaseTest {
         tourBookingPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(6));
-        tourBookingPageObj.verifyErrorValidationMessageWithExcel(ExcelUtil.getCellData(6,4));
+        tourBookingPageObj.verifyBookingMessageWithExcel(ExcelUtil.getCellData(6,4));
 
     }
     @Test(priority = 6)
@@ -94,12 +98,9 @@ public class TourBookingTest extends BaseTest {
     }
 
 //    @AfterClass
-//    public void logoutUser() throws InterruptedException {
-//        JavascriptExecutor js = (JavascriptExecutor) driver;
-//        js.executeScript("window.scrollBy(0,-1000)");
-//
-//        driver.findElement(By.xpath("//*[contains(text(),'/ Logout')]")).click();
+//    public void logoutUser() {
+//        commonStepsObj.scrollPageToTop();
+//        userSignInPageObj.userLogout();
 //    }
-
-
+//
 }

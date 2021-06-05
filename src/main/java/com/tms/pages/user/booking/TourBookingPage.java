@@ -6,14 +6,17 @@ import com.tms.util.dbutils.DbUtil;
 import com.tms.util.excelutils.ExcelUtil;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
-
 import java.util.Map;
 import java.util.logging.Logger;
-
 import static org.testng.Assert.assertEquals;
+
+/**
+ * @author Kithmi Kalpana
+ * Page Class for book tour package by user
+ *
+ */
 
 
 public class TourBookingPage {

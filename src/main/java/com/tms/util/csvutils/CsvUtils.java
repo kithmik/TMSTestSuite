@@ -3,9 +3,13 @@ package com.tms.util.csvutils;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
 import org.testng.annotations.Test;
-
 import java.io.FileReader;
 import java.io.IOException;
+
+/**
+ * @author Kithmi Kalpana
+ * Read the test data from the CSV file
+ */
 
 public class CsvUtils {
     //Provide test data CSV file path. As below path based on Mac machine. So, lets say you are using windows machine then write the below path accordingly.

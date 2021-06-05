@@ -22,21 +22,24 @@ public class CommonSteps {
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    public WebElement waitUntilElementClickable(By locator, long timeOut) {
-        WebDriverWait wait = new WebDriverWait(driver, timeOut);
-        return wait.until(ExpectedConditions.elementToBeClickable(locator));
-    }
-
     public WebElement waitUntilNextElementAppears(By locator, long timeOut) {
         WebElement element = new WebDriverWait(driver, timeOut)
                 .until(ExpectedConditions.presenceOfElementLocated(locator));
         return element;
     }
 
+    public void Wait() throws InterruptedException {
+        Thread.sleep(3000);
+    }
+
     public void scrollPage(){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,500)");
+    }
 
+    public void scrollPageToTop(){
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,-1000)");
     }
 
     public void scrollAtTheBottomOfThePage(){
@@ -46,11 +49,6 @@ public class CommonSteps {
 
     public void clickOkButtonOfConfirmPromt(){
         driver.switchTo( ).alert( ).accept();
-    }
-
-    public void tab() {
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1)); //switches to new tab
     }
 
 }
