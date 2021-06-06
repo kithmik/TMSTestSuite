@@ -3,7 +3,7 @@ package com.tms.user.booking;
 import com.tms.base.BaseTest;
 import com.tms.pages.user.booking.TourBookingPage;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
-import com.tms.pages.user.userprofile.SignInPage;
+import com.tms.pages.user.userprofile.UserSignInPage;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
 import org.testng.annotations.*;
@@ -21,7 +21,7 @@ public class TourBookingTest extends BaseTest {
     private CommonSteps commonStepsObj;
     private TourBookingPage tourBookingPageObj;
     private UserViewPieceObjectPage userViewPieceObjectPageObj;
-    private SignInPage signInPageObj;
+    private UserSignInPage UserSignInPageObj;
 
     @BeforeClass
     public void setup() throws InterruptedException {
@@ -30,11 +30,11 @@ public class TourBookingTest extends BaseTest {
         tourBookingPageObj = new TourBookingPage(driver, commonStepsObj);
         userViewPieceObjectPageObj = new UserViewPieceObjectPage(driver);
 
-        signInPageObj = new SignInPage(driver, commonStepsObj);
+        UserSignInPageObj = new UserSignInPage(driver, commonStepsObj);
 
         ExcelUtil.setExcelFileSheet("UserLogin");
         //User login into the application
-        signInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
+        UserSignInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
 
         ExcelUtil.setExcelFileSheet("TourBooking");
 
@@ -67,7 +67,7 @@ public class TourBookingTest extends BaseTest {
         userViewPieceObjectPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(4));
-        tourBookingPageObj.verifyErrorValidationMessageWithExcel(ExcelUtil.getCellData(4,4));
+        tourBookingPageObj.verifyBookingMessageWithExcel(ExcelUtil.getCellData(4,4));
 
     }
     @Test(priority = 4)
@@ -76,7 +76,7 @@ public class TourBookingTest extends BaseTest {
         userViewPieceObjectPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(5));
-        tourBookingPageObj.verifyErrorValidationMessageWithExcel(ExcelUtil.getCellData(5,4));
+        tourBookingPageObj.verifyBookingMessageWithExcel(ExcelUtil.getCellData(5,4));
 
     }
     @Test(priority = 5)
@@ -98,10 +98,4 @@ public class TourBookingTest extends BaseTest {
 
     }
 
-//    @AfterClass
-//    public void logoutUser() {
-//        commonStepsObj.scrollPageToTop();
-//        userSignInPageObj.userLogout();
-//    }
-//
 }

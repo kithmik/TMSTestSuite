@@ -36,18 +36,16 @@ public class TourBookingPage {
     public TourBookingPage(WebDriver driver, CommonSteps commonStepsObj) {
         this.driver = driver;
         this.commonStepsObj = commonStepsObj;
-
     }
 
     public void clickOnDetailsButton() {
+        LOGGER.info("clickOnDetailsButton | TourBookingPage");
         driver.findElement(detailsButtonElement).click();
     }
 
-    public void clickOnTourPackageMenu() {
-        driver.findElement(tourPackageElement).click();
-    }
 
     public void bookingTheTourPackageWithExcelData(XSSFRow row) {
+        LOGGER.info("bookingTheTourPackageWithExcelData | TourBookingPage");
         commonStepsObj.scrollPage();
         commonStepsObj.waitUntilNextElementAppears(fromDateElement,4000);
         driver.findElement(fromDateElement).click();
@@ -58,20 +56,24 @@ public class TourBookingPage {
         driver.findElement(bookButtonElement).click();
     }
     public void verifyBookingMessageWithExcel(String expectedResult) {
+        LOGGER.info("verifyBookingMessageWithExcel | TourBookingPage");
         String BookingMessage = driver.findElement(bookingSuccessElement).getText();
         Assert.assertEquals(BookingMessage,expectedResult);
     }
 
     public void verifyValidationMessageWithExcel(String expectedResult) {
+        LOGGER.info("verifyValidationMessageWithExcel | TourBookingPage");
         String ValidationMessage = driver.findElement(fromDateElement).getAttribute("validationMessage");
         Assert.assertEquals(ValidationMessage,expectedResult);
     }
     public void verifyErrorValidationMessageWithExcel(String expectedResult) {
+        LOGGER.info("verifyErrorValidationMessageWithExcel | TourBookingPage");
         String ValidationMessage = driver.findElement(fromDateElement).getAttribute("validationMessage");
         Assert.assertEquals(ValidationMessage,expectedResult);
     }
 
     public void verifyTourDetailOfSubmittedEnquiryInTheDB(String expectedFromDate,String expectedToDate,String expectedComment){
+        LOGGER.info("verifyTourDetailOfSubmittedEnquiryInTheDB | TourBookingPage");
         Map<String, String> result = dbUtil.getDataFromBookingTable();
         if (result != null) {
             LOGGER.info("From Date : " + result.get("FromDate"));

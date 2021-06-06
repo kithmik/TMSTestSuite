@@ -38,18 +38,21 @@ public class ManageBookingPage {
     }
 
     public void cancelTheTourPackageByAdmin(){
+        LOGGER.info("cancelTheTourPackageByAdmin | ManageBookingPage");
         commonStepsObj.scrollAtTheBottomOfThePage();
         commonStepsObj.waitUntilNextElementAppears(cancelElement,4000);
         driver.findElement(cancelElement).click();
     }
 
     public void confirmTheTourPackageByAdmin(){
+        LOGGER.info("confirmTheTourPackageByAdmin | ManageBookingPage");
         commonStepsObj.scrollAtTheBottomOfThePage();
         commonStepsObj.waitUntilNextElementAppears(confirmElement,4000);
         driver.findElement(confirmElement).click();
     }
 
     public void verifyAdminActionBookingMessageWithExcel(String expectedResult) {
+        LOGGER.info("verifyAdminActionBookingMessageWithExcel | ManageBookingPage");
         commonStepsObj.scrollPageToTop();
         commonStepsObj.waitUntilNextElementAppears(bookingConfirmElement,4000);
         String ValidationMessage = driver.findElement(bookingConfirmElement).getText();
@@ -57,6 +60,7 @@ public class ManageBookingPage {
     }
 
     public void verifyApplicationActionBookingMessageWithExcel(String expectedResult) throws InterruptedException {
+        LOGGER.info("verifyApplicationActionBookingMessageWithExcel | ManageBookingPage");
         commonStepsObj.Wait();
         String ValidationMessage = driver.findElement(ActionElement).getAttribute("value");
         System.out.println(driver.findElement(ActionElement).getAttribute("value"));
@@ -64,6 +68,7 @@ public class ManageBookingPage {
     }
 
     public void verifyAdminTourDetailOfSubmittedEnquiryInTheDB(String expectedAction) {
+        LOGGER.info("verifyAdminTourDetailOfSubmittedEnquiryInTheDB | ManageBookingPage");
         Map<String, String> result = dbUtil.getDataFromBookingTable();
         if (result != null) {
             LOGGER.info("Action : " + result.get("status"));

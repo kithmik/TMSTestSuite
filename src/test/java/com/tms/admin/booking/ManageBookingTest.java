@@ -6,10 +6,9 @@ import com.tms.pages.admin.booking.ManageBookingPage;
 import com.tms.pages.admin.userprofile.AdminSignInPage;
 import com.tms.pages.user.booking.TourBookingPage;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
-import com.tms.pages.user.userprofile.SignInPage;
+import com.tms.pages.user.userprofile.UserSignInPage;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.*;
 import java.lang.reflect.Method;
 import static com.tms.util.extentreports.ExtentTestManager.startTest;
@@ -28,7 +27,7 @@ public class ManageBookingTest extends BaseTest {
     private TourBookingPage tourBookingPageObj;
     private AdminViewPieceObjectPage adminViewPieceObjectPageObj;
     private UserViewPieceObjectPage userViewPieceObjectPageObj;
-    private SignInPage signInPageObj;
+    private UserSignInPage userSignInPageObj;
     private AdminSignInPage adminSignInPageObj;
 
 
@@ -39,18 +38,17 @@ public class ManageBookingTest extends BaseTest {
             initialization();
         }
 
-      //  commonStepsObj = new CommonSteps(driver);
+        commonStepsObj = new CommonSteps(driver);
         manageBookingPageObj = new ManageBookingPage(driver, commonStepsObj);
         tourBookingPageObj = new TourBookingPage(driver, commonStepsObj);
         userViewPieceObjectPageObj = new UserViewPieceObjectPage(driver);
-        signInPageObj = new SignInPage(driver, commonStepsObj);
+        userSignInPageObj = new UserSignInPage(driver, commonStepsObj);
         adminViewPieceObjectPageObj = new AdminViewPieceObjectPage(driver);
         adminSignInPageObj = new AdminSignInPage(driver, commonStepsObj);
 
-
         ExcelUtil.setExcelFileSheet("UserLogin");
         //User login into the application
-        signInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
+        userSignInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
 
         ExcelUtil.setExcelFileSheet("TourBooking");
         //User booking the tour package
@@ -59,14 +57,13 @@ public class ManageBookingTest extends BaseTest {
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(1));
 
         //user logout
-        signInPageObj.userLogout();
+        userSignInPageObj.userLogout();
 
         ExcelUtil.setExcelFileSheet("AdminLogin");
         //admin login into the admin panel
         adminSignInPageObj.adminLoginWithExcelData(ExcelUtil.getRowData(1));
 
         ExcelUtil.setExcelFileSheet("TourBooking");
-
 
     }
 
@@ -83,7 +80,6 @@ public class ManageBookingTest extends BaseTest {
     }
 
 
-
     @Test(priority = 2)
     public void verifyThatAdminCanCancelTheSuccessfullyAddedBooking(Method method) throws InterruptedException {
         startTest(method.getName(), "Verify that admin can cancel the successfully added booking");
@@ -98,10 +94,8 @@ public class ManageBookingTest extends BaseTest {
 
 
     @AfterMethod
-    public void logoutAdmin() throws InterruptedException {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,-1000)");
-        Thread.sleep(2000);
+    public void logoutAdmin() {
+        commonStepsObj.scrollPageToTop();
 
         adminSignInPageObj.adminLogout();
         driver.get(properties.getProperty("baseUrl"));
