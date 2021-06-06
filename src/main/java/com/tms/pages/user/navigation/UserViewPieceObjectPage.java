@@ -21,13 +21,8 @@ public class UserViewPieceObjectPage {
     private By tourPackageElement = By.xpath("//a[@href='package-list.php']");
     private static final Logger LOGGER = Logger.getLogger(UserViewPieceObjectPage.class.getName());
 
-
-    public UserViewPieceObjectPage (WebDriver driver, CommonSteps commonStepsObj){
-        this.driver = driver;
-        this.commonStepsObj = commonStepsObj;
-    }
-
     public UserViewPieceObjectPage(WebDriver driver) {
+        this.driver = driver;
     }
 
     public void clickOnSignUp() {
@@ -47,6 +42,7 @@ public class UserViewPieceObjectPage {
 
     public void clickOnTourPackageMenu() {
         LOGGER.info("clickOnTourPackageMenu | UserViewPieceObjectPage");
+        commonStepsObj=new CommonSteps(driver);
         commonStepsObj.waitUntilNextElementAppears(tourPackageElement,4000);
         driver.findElement(tourPackageElement).click();
     }
