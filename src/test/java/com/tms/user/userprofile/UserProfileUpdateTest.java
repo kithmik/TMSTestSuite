@@ -34,7 +34,7 @@ public class UserProfileUpdateTest extends BaseTest {
         initialization();
         commonStepsObj = new CommonSteps(driver);
         userSignInPageObj = new UserSignInPage(driver, commonStepsObj);
-        userViewPieceObjectPage = new UserViewPieceObjectPage(driver,commonStepsObj);
+        userViewPieceObjectPage = new UserViewPieceObjectPage(driver);
         userProfilePage = new UserProfilePage(driver);
         ExcelUtil.setExcelFileSheet("UserLogin");
         userSignInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
