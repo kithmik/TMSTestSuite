@@ -9,6 +9,7 @@ import org.testng.Assert;
 public class AdminSignInPage {
     private WebDriver driver;
     private CommonSteps commonStepsObj;
+
     private By signInElement =  By.xpath("//*[contains(text(),'Admin Login')]");
     private By usernameElement =  By.name("username");
     private By passwordElement =  By.name("password");
