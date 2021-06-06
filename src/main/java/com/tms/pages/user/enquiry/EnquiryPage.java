@@ -21,12 +21,6 @@ public class EnquiryPage {
     private WebDriver driver;
     private UserViewPieceObjectPage userViewPieceObjectPage;
 
-    public EnquiryPage(WebDriver driver, UserViewPieceObjectPage userViewPieceObjectPage) {
-        this.driver = driver;
-        this.userViewPieceObjectPage = userViewPieceObjectPage;
-
-    }
-
     private By fullName = By.id("fname");
     private By email = By.id("email");
     private By mobileNo = By.id("mobileno");
@@ -34,6 +28,12 @@ public class EnquiryPage {
     private By description = By.id("description");
     private By submitBtn = By.name("submit1");
     private By successfulMessage = By.xpath("//div[@class='succWrap']");
+
+    public EnquiryPage(WebDriver driver, UserViewPieceObjectPage userViewPieceObjectPage) {
+        this.driver = driver;
+        this.userViewPieceObjectPage = userViewPieceObjectPage;
+
+    }
 
     public void submitEnquiry(XSSFRow row){
         LOGGER.info("Verifying submit enquiry");

@@ -23,14 +23,14 @@ public class ManageEnquiryPage {
     private CommonSteps commonStepsObj;
     private AdminViewPieceObjectPage adminViewPieceObjectPage;
 
+    private By pendingElement = By.xpath("//table/tbody/tr[last()]/td[last()]/span/a[1]");
+    private By successfulMessage =  By.xpath("//div[@class='succWrap']");
+
     public ManageEnquiryPage(WebDriver driver, AdminViewPieceObjectPage adminViewPieceObjectPage, CommonSteps commonStepsObj) {
         this.driver = driver;
         this.adminViewPieceObjectPage = adminViewPieceObjectPage;
         this.commonStepsObj = commonStepsObj;
     }
-
-    private By pendingElement = By.xpath("//table/tbody/tr[last()]/td[last()]/span/a[1]");
-    private By successfulMessage =  By.xpath("//div[@class='succWrap']");
 
     public void readEnquiryByAdmin(){
         LOGGER.info("Verifying read enquiry by admin");
