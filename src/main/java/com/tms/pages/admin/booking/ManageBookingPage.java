@@ -23,19 +23,19 @@ import static org.testng.Assert.assertEquals;
 public class ManageBookingPage {
     private WebDriver driver;
     private CommonSteps commonStepsObj;
-    private static final DbUtil dbUtil = new DbUtil();
-    private static final Logger LOGGER = Logger.getLogger(TourBookingPage.class.getName());
-
-    public ManageBookingPage(WebDriver driver, CommonSteps commonStepsObj) {
-        this.driver = driver;
-        this.commonStepsObj = commonStepsObj;
-    }
-
     private By confirmElement = By.xpath("//table/tbody/tr[last()]/td[last()]/span/a[2]");
     private By cancelElement = By.xpath("//table/tbody/tr[last()]/td[last()]/span/a[1]");
     private By ActionElement = By.xpath("//table/tbody/tr[last()]/td[last()]");
     private By bookingConfirmElement =  By.xpath("//*[@class= 'succWrap']");
 
+    private static final DbUtil dbUtil = new DbUtil();
+    private static final Logger LOGGER = Logger.getLogger(TourBookingPage.class.getName());
+
+
+    public ManageBookingPage(WebDriver driver, CommonSteps commonStepsObj) {
+        this.driver = driver;
+        this.commonStepsObj = commonStepsObj;
+    }
 
     public void cancelTheTourPackageByAdmin(){
         commonStepsObj.scrollAtTheBottomOfThePage();

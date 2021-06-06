@@ -3,7 +3,7 @@ package com.tms.user.booking;
 import com.tms.base.BaseTest;
 import com.tms.pages.user.booking.TourBookingPage;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
-import com.tms.pages.user.userprofile.UserSignInPage;
+import com.tms.pages.user.userprofile.SignInPage;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
 import org.testng.annotations.*;
@@ -21,7 +21,7 @@ public class TourBookingTest extends BaseTest {
     private CommonSteps commonStepsObj;
     private TourBookingPage tourBookingPageObj;
     private UserViewPieceObjectPage userViewPieceObjectPageObj;
-    private UserSignInPage userSignInPageObj;
+    private SignInPage signInPageObj;
 
     @BeforeClass
     public void setup() throws InterruptedException {
@@ -29,11 +29,12 @@ public class TourBookingTest extends BaseTest {
         commonStepsObj = new CommonSteps(driver);
         tourBookingPageObj = new TourBookingPage(driver, commonStepsObj);
         userViewPieceObjectPageObj = new UserViewPieceObjectPage(driver);
-        userSignInPageObj = new UserSignInPage(driver, commonStepsObj);
+
+        signInPageObj = new SignInPage(driver, commonStepsObj);
 
         ExcelUtil.setExcelFileSheet("UserLogin");
         //User login into the application
-        userSignInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
+        signInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
 
         ExcelUtil.setExcelFileSheet("TourBooking");
 
@@ -63,7 +64,7 @@ public class TourBookingTest extends BaseTest {
     @Test(priority = 3)
     public void whenEnteringToDateVerifyThatUserCantAddADateWhichIsBeforeFromDate(Method method) {
         startTest(method.getName(), "When entering To date, verify that user can't add a date which is before From date");
-        tourBookingPageObj.clickOnTourPackageMenu();
+        userViewPieceObjectPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(4));
         tourBookingPageObj.verifyErrorValidationMessageWithExcel(ExcelUtil.getCellData(4,4));
@@ -72,7 +73,7 @@ public class TourBookingTest extends BaseTest {
     @Test(priority = 4)
     public void verifyThatUserCantSelectAPastDateFromNowAsTheFromDate(Method method) {
         startTest(method.getName(), "Verify that user can't select a past date from now as the From date");
-        tourBookingPageObj.clickOnTourPackageMenu();
+        userViewPieceObjectPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(5));
         tourBookingPageObj.verifyErrorValidationMessageWithExcel(ExcelUtil.getCellData(5,4));
@@ -81,7 +82,7 @@ public class TourBookingTest extends BaseTest {
     @Test(priority = 5)
     public void verifyThatUserCantSubmitTheBookingFormByAddingInvalidDataForFromDateAndToDate(Method method) {
         startTest(method.getName(), "Verify that user can't submit the booking form by adding invalid data for From date and To date");
-        tourBookingPageObj.clickOnTourPackageMenu();
+        userViewPieceObjectPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(6));
         tourBookingPageObj.verifyBookingMessageWithExcel(ExcelUtil.getCellData(6,4));
@@ -90,7 +91,7 @@ public class TourBookingTest extends BaseTest {
     @Test(priority = 6)
     public void verifyThatUserCantSubmitTheBookFormByAddingOnlyOptionalFields(Method method) {
         startTest(method.getName(), "Verify that user cant submit the book form by adding only optional fields");
-        tourBookingPageObj.clickOnTourPackageMenu();
+        userViewPieceObjectPageObj.clickOnTourPackageMenu();
         tourBookingPageObj.clickOnDetailsButton();
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(3));
         tourBookingPageObj.verifyValidationMessageWithExcel(ExcelUtil.getCellData(3,4));

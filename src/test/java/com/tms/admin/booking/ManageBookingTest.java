@@ -6,7 +6,7 @@ import com.tms.pages.admin.booking.ManageBookingPage;
 import com.tms.pages.admin.userprofile.AdminSignInPage;
 import com.tms.pages.user.booking.TourBookingPage;
 import com.tms.pages.user.navigation.UserViewPieceObjectPage;
-import com.tms.pages.user.userprofile.UserSignInPage;
+import com.tms.pages.user.userprofile.SignInPage;
 import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
 import org.openqa.selenium.JavascriptExecutor;
@@ -28,7 +28,7 @@ public class ManageBookingTest extends BaseTest {
     private TourBookingPage tourBookingPageObj;
     private AdminViewPieceObjectPage adminViewPieceObjectPageObj;
     private UserViewPieceObjectPage userViewPieceObjectPageObj;
-    private UserSignInPage userSignInPageObj;
+    private SignInPage signInPageObj;
     private AdminSignInPage adminSignInPageObj;
 
 
@@ -39,18 +39,18 @@ public class ManageBookingTest extends BaseTest {
             initialization();
         }
 
-        commonStepsObj = new CommonSteps(driver);
+      //  commonStepsObj = new CommonSteps(driver);
         manageBookingPageObj = new ManageBookingPage(driver, commonStepsObj);
         tourBookingPageObj = new TourBookingPage(driver, commonStepsObj);
         userViewPieceObjectPageObj = new UserViewPieceObjectPage(driver);
-        userSignInPageObj = new UserSignInPage(driver, commonStepsObj);
+        signInPageObj = new SignInPage(driver, commonStepsObj);
         adminViewPieceObjectPageObj = new AdminViewPieceObjectPage(driver);
         adminSignInPageObj = new AdminSignInPage(driver, commonStepsObj);
 
 
         ExcelUtil.setExcelFileSheet("UserLogin");
         //User login into the application
-        userSignInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
+        signInPageObj.userLoginWithExcelData(ExcelUtil.getRowData(1));
 
         ExcelUtil.setExcelFileSheet("TourBooking");
         //User booking the tour package
@@ -59,7 +59,7 @@ public class ManageBookingTest extends BaseTest {
         tourBookingPageObj.bookingTheTourPackageWithExcelData(ExcelUtil.getRowData(1));
 
         //user logout
-        userSignInPageObj.userLogout();
+        signInPageObj.userLogout();
 
         ExcelUtil.setExcelFileSheet("AdminLogin");
         //admin login into the admin panel

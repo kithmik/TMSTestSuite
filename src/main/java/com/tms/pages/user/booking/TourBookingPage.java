@@ -22,17 +22,6 @@ import static org.testng.Assert.assertEquals;
 public class TourBookingPage {
     private WebDriver driver;
     private CommonSteps commonStepsObj;
-    private static final DbUtil dbUtil = new DbUtil();
-    private static final Logger LOGGER = Logger.getLogger(TourBookingPage.class.getName());
-
-
-
-    public TourBookingPage(WebDriver driver, CommonSteps commonStepsObj) {
-        this.driver = driver;
-        this.commonStepsObj = commonStepsObj;
-
-    }
-
     private By detailsButtonElement = By.xpath("//a[@href='package-details.php?pkgid=1']");
     private By fromDateElement = By.id("datepicker");
     private By toDateElement = By.id("datepicker1");
@@ -41,6 +30,14 @@ public class TourBookingPage {
     private By bookingSuccessElement = By.xpath("//*[contains(@class, 'succWrap')]");
     private By tourPackageElement = By.xpath("//a[@href='package-list.php']");
 
+    private static final DbUtil dbUtil = new DbUtil();
+    private static final Logger LOGGER = Logger.getLogger(TourBookingPage.class.getName());
+
+    public TourBookingPage(WebDriver driver, CommonSteps commonStepsObj) {
+        this.driver = driver;
+        this.commonStepsObj = commonStepsObj;
+
+    }
 
     public void clickOnDetailsButton() {
         driver.findElement(detailsButtonElement).click();
