@@ -8,13 +8,12 @@ import com.tms.util.common.CommonSteps;
 import com.tms.util.excelutils.ExcelUtil;
 import org.testng.annotations.*;
 import java.lang.reflect.Method;
+import static com.tms.util.extentreports.ExtentTestManager.startTest;
 
 /**
  * @author Kithmi Kalpana
  * Test Class for book tour package by user
  */
-
-import static com.tms.util.extentreports.ExtentTestManager.startTest;
 
 public class TourBookingTest extends BaseTest {
 

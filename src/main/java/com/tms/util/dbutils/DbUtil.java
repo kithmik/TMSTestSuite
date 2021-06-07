@@ -33,7 +33,7 @@ public class DbUtil {
         }
 
         try {
-            String[] credentials = CsvUtils.ReadCSV();
+            String[] credentials = CsvUtils.readCSV();
             conn = DriverManager.getConnection(credentials[0], credentials[1], credentials[2]);
             if (conn != null) {
                 LOGGER.info("Connected to the database!");

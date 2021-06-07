@@ -15,9 +15,7 @@ public class CsvUtils {
     //Provide test data CSV file path.
     static String CSV_PATH = "src/main/resources/config/db_config.csv";
 
-
-    @Test
-    public static String[] ReadCSV() throws IOException, CsvValidationException {
+    public static String[] readCSV() throws IOException, CsvValidationException {
         //Create an object of CSVReader
         CSVReader csvReader = new CSVReader(new FileReader(CSV_PATH));
         String[] csvCell = csvReader.readNext();

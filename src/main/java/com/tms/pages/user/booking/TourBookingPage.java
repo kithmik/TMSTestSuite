@@ -83,7 +83,7 @@ public class TourBookingPage {
             LOGGER.info("Comment : " + result.get("Comment"));
             assertEquals(expectedComment, result.get("Comment"));
         } else {
-            LOGGER.info("No db record found for Full Name");
+            LOGGER.info("No DB record found");
         }
     }
 

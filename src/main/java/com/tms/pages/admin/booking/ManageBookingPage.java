@@ -75,7 +75,7 @@ public class ManageBookingPage {
             assertEquals(expectedAction, result.get("status"));
 
         } else {
-            LOGGER.info("No db record found for Full Name");
+            LOGGER.info("No DB record found");
         }
     }
 
