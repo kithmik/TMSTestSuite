@@ -36,6 +36,7 @@ public class SignUpPage {
 
     public void enterUserDetails(XSSFRow row) throws InterruptedException {
         LOGGER.info("enterUserDetails | SignUpPage");
+        Thread.sleep(5000);
         commonSteps.waitUntilElementPresence(fullName,60000);
         driver.findElement(fullName).sendKeys(row.getCell(1).toString());
         driver.findElement(mobileNumber).clear();

@@ -33,6 +33,7 @@ public class ManageBookingTest extends BaseTest {
 
     @BeforeMethod
     public void setup() throws InterruptedException {
+      //  driver.get(properties.getProperty("baseUrl"));
 
         if(!isBrowserOpen) {
             initialization();
@@ -96,7 +97,6 @@ public class ManageBookingTest extends BaseTest {
     @AfterMethod
     public void logoutAdmin() {
         commonStepsObj.scrollPageToTop();
-
         adminSignInPageObj.adminLogout();
         driver.get(properties.getProperty("baseUrl"));
 

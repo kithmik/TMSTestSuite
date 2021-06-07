@@ -12,7 +12,7 @@ import java.io.IOException;
  */
 
 public class CsvUtils {
-    //Provide test data CSV file path. As below path based on Mac machine. So, lets say you are using windows machine then write the below path accordingly.
+    //Provide test data CSV file path.
     static String CSV_PATH = "src/main/resources/config/db_config.csv";
 
 

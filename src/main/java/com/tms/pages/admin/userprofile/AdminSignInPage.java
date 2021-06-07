@@ -15,6 +15,8 @@ public class AdminSignInPage {
     private By passwordElement =  By.name("password");
     private By loginButtonElement =  By.name("login");
     private By logoutElement =  By.xpath("//*[@href='logout.php']");
+    private By logoutDropdownElement =  By.className("dropdown-toggle");
+
 
     public AdminSignInPage(WebDriver driver, CommonSteps commonStepsObj) {
         this.driver = driver;
@@ -52,7 +54,9 @@ public class AdminSignInPage {
     }
 
     public void adminLogout() {
-        driver.findElement(By.className("dropdown-toggle")).click();
+        commonStepsObj.scrollPageToTop();
+        commonStepsObj.waitUntilElementPresence(logoutDropdownElement,4000);
+        driver.findElement(logoutDropdownElement).click();
         commonStepsObj.waitUntilElementPresence(logoutElement,4000);
         driver.findElement(logoutElement).click();
     }

@@ -7,10 +7,13 @@
 
     <test name="TMS UI Tests">
         <classes>
+            <class name="com.tms.user.userprofile.SignUpTest"/>
+            <class name="com.tms.user.userprofile.UserSignInTest"/>
             <class name="com.tms.user.booking.TourBookingTest"/>
-            <class name="com.tms.user.enquiry.EnquiryTest"/>
             <class name="com.tms.user.userprofile.UserProfileUpdateTest"/>
+            <class name="com.tms.user.enquiry.EnquiryTest"/>
 
+            <class name="com.tms.admin.userprofile.AdminSignInTest"/>
             <class name="com.tms.admin.packages.PackageCreateAndUpdateTest"/>
             <class name="com.tms.admin.booking.ManageBookingTest"/>
             <class name="com.tms.admin.enquiry.ManageEnquiryTest"/>
